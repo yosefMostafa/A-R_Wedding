@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="description" content="Wedding Invitation — Ahmed &amp; Reham" />
+    <title>Ahmed &amp; Reham — Wedding Invitation</title>
+
+    <!-- Google Fonts: Cormorant Garamond (Latin display) + Aref Ruqaa (Arabic display) + Amiri (Arabic body) + Reem Kufi (labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Aref+Ruqaa:wght@400;700&family=Amiri:ital,wght@0,400;1,400&family=Reem+Kufi:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles — tokens must load first -->
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+
+    <!-- Config — must load before main.js -->
+    <script src="config.js"></script>
+  </head>
+  <body>
+    <!-- Islamic geometric lattice background -->
+    <div class="bg-pattern" aria-hidden="true"></div>
+
+    <!-- Floating gold petals layer -->
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
+    <!-- ============================================================
+       ENVELOPE OVERLAY
+       ============================================================ -->
+    <div class="envelope-scene" id="scene">
+      <div
+        class="envelope"
+        id="envelope"
+        role="button"
+        tabindex="0"
+        aria-label="Open the wedding invitation"
+      >
+        <!-- Envelope body + inner pocket triangles -->
+        <div class="env-body">
+          <div class="env-pocket"></div>
+          <!-- Letter peeking from pocket -->
+          <div class="env-letter">
+            <div class="mini">
+              <b id="seal-mono2">A&amp;R</b>
+              <span>Wedding Invitation</span>
+            </div>
+          </div>
+          <!-- Bottom triangle -->
+          <div class="env-bottom"></div>
+        </div>
+
+        <!-- Envelope flap -->
+        <div class="env-flap"></div>
+
+        <!-- Ripple rings — "tap here" affordance -->
+        <span class="tap-ring" aria-hidden="true"></span>
+        <span class="tap-ring r2" aria-hidden="true"></span>
+
+        <!-- Wax seal -->
+        <div class="env-seal" id="seal" aria-hidden="true">A&amp;R</div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+       MAIN INVITATION CARD
+       ============================================================ -->
+    <main class="invitation" id="invitation">
+      <div class="card">
+        <!-- Corner diamonds -->
+        <span class="corner tl" aria-hidden="true"></span>
+        <span class="corner tr" aria-hidden="true"></span>
+        <span class="corner bl" aria-hidden="true"></span>
+        <span class="corner br" aria-hidden="true"></span>
+
+        <div class="inner">
+          <!-- Bismillah -->
+          <div class="bismillah gold-foil reveal d1">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </div>
+
+          <!-- Ornamental divider -->
+          <div class="divider reveal d1" aria-hidden="true">
+            <span class="line"></span>
+            <span class="gem sm"></span>
+            <span class="gem"></span>
+            <span class="gem sm"></span>
+            <span class="line r"></span>
+          </div>
+
+          <!-- Eyebrow label -->
+          <p class="eyebrow reveal d2" style="margin-bottom: 1.1em">
+            The Wedding Of
+          </p>
+
+          <!-- Mihrab arch with couple names -->
+          <div class="names reveal d3">
+            <div class="arch">
+              <div class="name-ar gold-foil" id="groom-ar"></div>
+              <div class="name-en" id="groom-en"></div>
+              <div class="amp gold-foil" aria-label="and">&amp;</div>
+              <div class="name-ar gold-foil" id="bride-ar"></div>
+              <div class="name-en" id="bride-en"></div>
+            </div>
+          </div>
+          <!-- Invitation line (Arabic + English) -->
+          <p class="invite-line reveal d2" id="invite-line"></p>
+          <!-- Ornamental divider -->
+          <div class="divider reveal d4" aria-hidden="true">
+            <span class="line"></span>
+            <span class="gem sm"></span>
+            <span class="gem"></span>
+            <span class="gem sm"></span>
+            <span class="line r"></span>
+          </div>
+
+          <!-- Date -->
+          <div class="date-main reveal d4">
+            <span class="ar" id="date-ar"></span>
+            <span id="date-en"></span>
+          </div>
+          <div class="date-time reveal d4">
+            <span class="ar" id="time-ar"></span>
+            &nbsp;&bull;&nbsp;
+            <span id="time-en"></span>
+          </div>
+
+          <!-- Live countdown -->
+          <div
+            class="countdown reveal d5"
+            id="countdown"
+            aria-label="Countdown to the wedding"
+          >
+            <div class="cd-unit">
+              <div class="cd-num" id="cd-d">00</div>
+              <div class="cd-label">Days</div>
+            </div>
+            <div class="cd-sep" aria-hidden="true">:</div>
+            <div class="cd-unit">
+              <div class="cd-num" id="cd-h">00</div>
+              <div class="cd-label">Hours</div>
+            </div>
+            <div class="cd-sep" aria-hidden="true">:</div>
+            <div class="cd-unit">
+              <div class="cd-num" id="cd-m">00</div>
+              <div class="cd-label">Minutes</div>
+            </div>
+            <div class="cd-sep" aria-hidden="true">:</div>
+            <div class="cd-unit">
+              <div class="cd-num" id="cd-s">00</div>
+              <div class="cd-label">Seconds</div>
+            </div>
+          </div>
+
+          <!-- Qur'anic verse -->
+          <div class="verse reveal d6">
+            <div class="ar" id="verse-ar"></div>
+            <p class="en" id="verse-en"></p>
+            <div class="ref" id="verse-ref"></div>
+          </div>
+
+          <!-- Venue -->
+          <p class="eyebrow reveal d6" style="margin-bottom: 0.9em">
+            The Celebration
+          </p>
+          <div class="venue-name reveal d6">
+            <span class="ar" id="venue-name-ar"></span>
+            <span id="venue-name-en"></span>
+          </div>
+          <div class="venue-addr reveal d6">
+            <span class="ar" id="venue-addr-ar"></span>
+            <span id="venue-addr-en"></span>
+          </div>
+          <a
+            class="maps-btn reveal d6"
+            id="maps-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="pin" aria-hidden="true"></span>
+            Open in Google Maps
+          </a>
+
+          <!-- Bottom divider + hashtag -->
+          <div
+            class="divider reveal d7"
+            style="margin-top: clamp(28px, 5vw, 40px)"
+            aria-hidden="true"
+          >
+            <span class="line"></span>
+            <span class="gem sm"></span>
+            <span class="gem"></span>
+            <span class="gem sm"></span>
+            <span class="line r"></span>
+          </div>
+          <p class="hashtag reveal d7" id="hashtag"></p>
+        </div>
+        <!-- .inner -->
+      </div>
+      <!-- .card -->
+    </main>
+
+    <!-- ============================================================
+       MUSIC TOGGLE (fixed bottom-right)
+       ============================================================ -->
+    <button
+      class="music-btn"
+      id="music-btn"
+      aria-label="Toggle background music"
+      title="Music"
+    >
+      <span class="disc"></span>
+      <span class="bar" aria-hidden="true"></span>
+    </button>
+    <audio id="audio" loop preload="none"></audio>
+
+    <!-- Scripts — order matters -->
+    <script src="scripts/countdown.js"></script>
+    <script src="scripts/petals.js"></script>
+    <script src="scripts/music.js"></script>
+    <script src="scripts/envelope.js"></script>
+    <script src="scripts/scroll.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

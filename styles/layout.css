@@ -1,0 +1,78 @@
+/* ================================================================
+   LAYOUT — structural positioning and section structure
+   ================================================================ */
+
+/* ── Islamic geometric lattice background (full-page fixed) ───── */
+.bg-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(circle at center, rgba(184,144,47,.10) 0 1.2px, transparent 1.6px),
+    repeating-linear-gradient(45deg,  rgba(184,144,47,.045) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(-45deg, rgba(184,144,47,.045) 0 1px, transparent 1px 28px),
+    radial-gradient(circle at center, var(--cream) 0%, var(--cream-deep) 140%);
+  background-size: 28px 28px, 28px 28px, 28px 28px, 100% 100%;
+}
+
+/* ── Petals layer ─────────────────────────────────────────────── */
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ── Envelope scene overlay ───────────────────────────────────── */
+.envelope-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Dark warm-brown vignette — fallbacks keep it dark if vars fail */
+  background:
+    radial-gradient(
+      circle at center,
+      var(--env-bg-center, #2a2114) 0%,
+      var(--env-bg-edge,   #15100a) 80%
+    );
+  perspective: 1400px;
+  transition: opacity 1.1s ease 0.6s, visibility 0s linear 1.7s;
+}
+.envelope-scene.opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── Main invitation page ─────────────────────────────────────── */
+.invitation {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 48px);
+  opacity: 0;
+  transition: opacity 1s ease 1.2s;
+}
+.invitation.show { opacity: 1; }
+
+/* ── Music button (fixed) ─────────────────────────────────────── */
+.music-btn {
+  position: fixed;
+  z-index: 60;
+  right: max(16px, 3vw);
+  bottom: max(16px, 3vw);
+}
+
+/* ── Hidden utility ───────────────────────────────────────────── */
+.hidden { display: none !important; }

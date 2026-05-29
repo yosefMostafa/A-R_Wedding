@@ -1,0 +1,85 @@
+/**
+ * ╔══════════════════════════════════════════════════════════════╗
+ * ║              DESIGN TOKENS — SINGLE SOURCE                  ║
+ * ║  ALL color hex values live here and ONLY here.              ║
+ * ║  To retheme the site, change values in this file only.      ║
+ * ║  (config.js theme{} overrides are applied on top at runtime)║
+ * ╚══════════════════════════════════════════════════════════════╝
+ */
+
+:root {
+  /* ── Cream palette ───────────────────────────────────────────── */
+  --cream:        #f6efe0;
+  --cream-deep:   #ece0c8;
+  --cream-light:  #fbf6ea;
+  --cream-card:   #f3ead6;
+
+  /* ── Gold scale ──────────────────────────────────────────────── */
+  --gold:         #b8902f;
+  --gold-light:   #d8bb6e;
+  --gold-bright:  #ecd597;
+  --gold-dark:    #9c7420;
+  --gold-darker:  #7c5a16;
+  --gold-deep:    #a87d22;
+
+  /* ── Ink (text) ──────────────────────────────────────────────── */
+  --ink:          #463724;
+  --ink-soft:     #7a674b;
+  --ink-muted:    #9e8a6e;
+
+  /* ── Envelope dark background ────────────────────────────────── */
+  --env-bg-center:  #2a2114;
+  --env-bg-edge:    #15100a;
+
+  /* ── Gold gradient (metallic foil effect) ────────────────────── */
+  --gold-gradient: linear-gradient(
+    135deg,
+    #a87d22 0%,
+    #e8cd86 35%,
+    #b8902f 55%,
+    #f2dca0 75%,
+    #9c7420 100%
+  );
+
+  /* ── Envelope parchment shades (3-D lighting on paper) ──────── */
+  --env-body-lt:      #f3ead7;
+  --env-body-dk:      #e4d4b0;
+  --env-pocket-lt:    #ecdcbb;
+  --env-pocket-dk:    #dcc79b;
+  --env-bottom-lt:    #efe1c4;
+  --env-bottom-dk:    #e0cda3;
+  --env-flap-lt:      #f0e2c6;
+  --env-flap-dk:      #e2cfa4;
+  --env-letter-bg:    #fbf6ea;
+  --env-seal-lt:      #caa23e;
+  --env-seal-dk:      #9c7420;
+  --env-seal-edge:    #7c5a16;
+  --env-seal-text:    #3a2c12;
+
+  /* ── Font stacks ─────────────────────────────────────────────── */
+  --serif:      "Cormorant Garamond", Georgia, serif;
+  --ar-display: "Aref Ruqaa", serif;
+  --ar-body:    "Amiri", serif;
+  --kufi:       "Reem Kufi", sans-serif;
+
+  /* ── Motion ──────────────────────────────────────────────────── */
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-envelope:  cubic-bezier(0.6, 0, 0.3, 1);
+  --ease-letter:    cubic-bezier(0.5, 0, 0.2, 1);
+}
+
+/* Reduced motion — disable all animations globally */
+@media (prefers-reduced-motion: reduce) {
+  .petal,
+  .music-btn .disc,
+  .envelope,
+  .env-seal,
+  .tap-ring {
+    animation: none !important;
+  }
+  .reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
