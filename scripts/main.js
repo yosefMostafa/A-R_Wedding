@@ -179,14 +179,16 @@
       window.removeEventListener('keydown',     stop);
     }
 
-    var accum = 0;
-    function tick() {
+    var startTs = null;
+    var startY  = 0;
+    var SPEED   = 30; /* px/sec — tune here */
+    function tick(ts) {
       if (stopped) return;
-      var atBottom = (window.pageYOffset + window.innerHeight) >=
-                     (document.documentElement.scrollHeight - 4);
-      if (atBottom) { stop(); return; }
-      accum += 0.2;              /* 0.2 px/frame ≈ 12 px/sec at 60 fps */
-      if (accum >= 1) { window.scrollBy(0, 1); accum -= 1; }
+      if (startTs === null) { startTs = ts; startY = window.pageYOffset; }
+      var targetY = startY + SPEED * (ts - startTs) / 1000;
+      var maxY    = document.documentElement.scrollHeight - window.innerHeight;
+      if (targetY >= maxY) { window.scrollTo(0, maxY); stop(); return; }
+      window.scrollTo(0, targetY);   /* float position — no accumulator, no stutter */
       rafId = requestAnimationFrame(tick);
     }
 

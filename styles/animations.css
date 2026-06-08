@@ -38,6 +38,8 @@
 .reveal {
   opacity: 0;
   transform: translateY(30px);
+  will-change: opacity, transform;
   transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.reveal.in-view { will-change: auto; }
 .reveal.in-view { opacity: 1; transform: none; }
