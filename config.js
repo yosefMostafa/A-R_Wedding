@@ -56,7 +56,7 @@ window.WEDDING_CONFIG = {
      Facebook, WhatsApp, and iMessage.
      Example: "https://ahmed-reham-2026.com"
      Leave as "" during local development. */
-  siteUrl: "",
+  siteUrl: "https://ahemd-reham.s-yosef-mostafa.workers.dev/",
 
   /* ---- BACKGROUND MUSIC ---------------------------------------------
      Drop an audio file in the project and put its path here, e.g.
