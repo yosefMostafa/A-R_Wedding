@@ -11,9 +11,9 @@
   opacity: 0.5;
   background-color: var(--cream);
   background-image:
-    radial-gradient(circle at center, rgba(184,144,47,.10) 0 1.2px, transparent 1.6px),
-    repeating-linear-gradient(45deg,  rgba(184,144,47,.045) 0 1px, transparent 1px 28px),
-    repeating-linear-gradient(-45deg, rgba(184,144,47,.045) 0 1px, transparent 1px 28px),
+    radial-gradient(circle at center, rgba(110,82,50,.10) 0 1.2px, transparent 1.6px),
+    repeating-linear-gradient(45deg,  rgba(110,82,50,.045) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(-45deg, rgba(110,82,50,.045) 0 1px, transparent 1px 28px),
     radial-gradient(circle at center, var(--cream) 0%, var(--cream-deep) 140%);
   background-size: 28px 28px, 28px 28px, 28px 28px, 100% 100%;
 }
@@ -27,7 +27,7 @@
   overflow: hidden;
 }
 
-/* ── Envelope scene overlay ───────────────────────────────────── */
+/* ── Tennis court opener scene ────────────────────────────────── */
 .envelope-scene {
   position: fixed;
   inset: 0;
@@ -35,16 +35,63 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Dark warm-brown vignette — fallbacks keep it dark if vars fail */
-  background:
-    radial-gradient(
-      circle at center,
-      var(--env-bg-center, #2a2114) 0%,
-      var(--env-bg-edge,   #15100a) 80%
-    );
-  perspective: 1400px;
-  transition: opacity 1.1s ease 0.6s, visibility 0s linear 1.7s;
+  background: var(--court-bg);
+  overflow: hidden;
+  transition: opacity 1.2s ease 0.5s, visibility 0s linear 1.8s;
 }
+
+/* Dark veil over the court photo for legibility */
+.envelope-scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 36, 18, 0.44),
+    rgba(16, 36, 18, 0.24) 42%,
+    rgba(16, 36, 18, 0.62)
+  );
+}
+
+/* Court gate background image — blurred at first, focus-pulls on serve */
+.scene-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transform: scale(1.08);
+  filter: blur(9px);
+  transition: transform 1.7s cubic-bezier(0.4, 0, 0.2, 1), filter 1.5s ease;
+}
+.envelope-scene.opening .scene-bg {
+  transform: scale(1.6);
+  filter: blur(0);
+}
+
+/* Soft stadium-light halo glow behind the card */
+.envelope-scene::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(120vw, 620px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(228, 242, 90, 0.18), transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+  animation: halo-breathe 6s ease-in-out infinite;
+}
+.envelope-scene.opening::after {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
 .envelope-scene.opened {
   opacity: 0;
   visibility: hidden;

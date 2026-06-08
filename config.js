@@ -50,6 +50,14 @@ window.WEDDING_CONFIG = {
     ref: { en: "Qur'an 30:21", ar: "سورة الروم — ٢١" }
   },
 
+  /* ---- SITE URL (for social media preview) --------------------------
+     Set this to your hosted URL (no trailing slash) so the og:image
+     in the preview card becomes an absolute URL — required by
+     Facebook, WhatsApp, and iMessage.
+     Example: "https://ahmed-reham-2026.com"
+     Leave as "" during local development. */
+  siteUrl: "",
+
   /* ---- BACKGROUND MUSIC ---------------------------------------------
      Drop an audio file in the project and put its path here, e.g.
      "music/nasheed.mp3". The toggle button works either way; if this
@@ -61,12 +69,12 @@ window.WEDDING_CONFIG = {
      These overrides are applied on top of tokens.css at runtime.
      Remove any key you don't want to override. */
   theme: {
-    cream:      "#f6efe0",
-    creamDeep:  "#ece0c8",
-    gold:       "#b8902f",
-    goldLight:  "#d8bb6e",
-    goldBright: "#ecd597",
-    ink:        "#463724"
+    cream:      "#f1e7d3",
+    creamDeep:  "#e2d4b9",
+    gold:       "#6e5232",
+    goldLight:  "#9c7748",
+    goldBright: "#c6a06a",
+    ink:        "#161616"
   }
 
 };

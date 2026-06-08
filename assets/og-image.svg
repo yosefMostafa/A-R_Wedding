@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Parchment background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#f6efdd"/>
+      <stop offset="100%" stop-color="#e4d5b3"/>
+    </linearGradient>
+
+    <!-- Metallic dark foil (for headline text) -->
+    <linearGradient id="foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#1a1a1a"/>
+      <stop offset="32%"  stop-color="#3a3a3a"/>
+      <stop offset="54%"  stop-color="#111"/>
+      <stop offset="74%"  stop-color="#3a3a3a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+
+    <!-- Warm clay gradient (frame, corners, gems) -->
+    <linearGradient id="clay" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#4a3720"/>
+      <stop offset="35%"  stop-color="#9a7445"/>
+      <stop offset="55%"  stop-color="#6e5232"/>
+      <stop offset="75%"  stop-color="#bb9263"/>
+      <stop offset="100%" stop-color="#41301a"/>
+    </linearGradient>
+
+    <!-- Subtle dot pattern -->
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="1.1" fill="#6e5232" opacity="0.12"/>
+    </pattern>
+
+    <!-- Diagonal crosshatch for verse-block-style band -->
+    <pattern id="hatch" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="14" x2="14" y2="0" stroke="#6e5232" stroke-width="0.6" opacity="0.12"/>
+    </pattern>
+  </defs>
+
+  <!-- ── Background ─────────────────────────────────────────────── -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- ── Double border frame ────────────────────────────────────── -->
+  <rect x="22" y="18" width="1156" height="594" fill="none" stroke="#6e5232" stroke-width="1.6"/>
+  <rect x="34" y="30" width="1132" height="570" fill="none" stroke="#6e5232" stroke-width="0.8" stroke-opacity="0.5"/>
+
+  <!-- ── Corner diamonds ───────────────────────────────────────── -->
+  <!-- Top-left -->
+  <polygon points="22,6 35,18 22,30 9,18"  fill="url(#clay)"/>
+  <!-- Top-right -->
+  <polygon points="1178,6 1191,18 1178,30 1165,18" fill="url(#clay)"/>
+  <!-- Bottom-left -->
+  <polygon points="22,600 35,612 22,624 9,612" fill="url(#clay)"/>
+  <!-- Bottom-right -->
+  <polygon points="1178,600 1191,612 1178,624 1165,612" fill="url(#clay)"/>
+
+  <!-- ── Bismillah ──────────────────────────────────────────────── -->
+  <text x="600" y="88"
+    text-anchor="middle"
+    font-family="'Segoe UI', 'Arabic Typesetting', 'Traditional Arabic', serif"
+    font-size="28"
+    fill="url(#foil)">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</text>
+
+  <!-- ── Top divider ────────────────────────────────────────────── -->
+  <line x1="420" y1="110" x2="574" y2="110" stroke="#6e5232" stroke-width="1"/>
+  <polygon points="600,104 607,111 600,118 593,111" fill="#6e5232" opacity="0.7"/>
+  <polygon points="600,106 605,111 600,116 595,111" fill="#6e5232"/>
+  <line x1="626" y1="110" x2="780" y2="110" stroke="#6e5232" stroke-width="1"/>
+
+  <!-- ── "THE WEDDING OF" label ─────────────────────────────────── -->
+  <text x="600" y="143"
+    text-anchor="middle"
+    font-family="Arial, 'Helvetica Neue', sans-serif"
+    font-size="11"
+    fill="#6e5232"
+    letter-spacing="7">THE WEDDING OF</text>
+
+  <!-- ── Mihrab arch for names (decorative arch shape) ─────────── -->
+  <path d="M 430,195 Q 430,160 600,155 Q 770,160 770,195 L 770,395 L 430,395 Z"
+    fill="none" stroke="#6e5232" stroke-width="1.4"/>
+  <path d="M 442,198 Q 442,173 600,168 Q 758,173 758,198 L 758,384 L 442,384 Z"
+    fill="none" stroke="#6e5232" stroke-width="0.7" stroke-opacity="0.5"/>
+
+  <!-- ── Arabic groom name ─────────────────────────────────────── -->
+  <text x="600" y="258"
+    text-anchor="middle"
+    font-family="'Segoe UI', 'Arabic Typesetting', 'Traditional Arabic', serif"
+    font-size="72"
+    fill="url(#foil)">أحمد</text>
+
+  <!-- ── "&" connector ────────────────────────────────────────────-->
+  <text x="600" y="296"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="34"
+    font-style="italic"
+    fill="url(#clay)">&amp;</text>
+
+  <!-- ── Arabic bride name ─────────────────────────────────────── -->
+  <text x="600" y="362"
+    text-anchor="middle"
+    font-family="'Segoe UI', 'Arabic Typesetting', 'Traditional Arabic', serif"
+    font-size="72"
+    fill="url(#foil)">ريهام</text>
+
+  <!-- ── English names ─────────────────────────────────────────── -->
+  <text x="600" y="430"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="19"
+    fill="#6e5232"
+    letter-spacing="5">AHMED  &amp;  REHAM</text>
+
+  <!-- ── Middle divider ────────────────────────────────────────── -->
+  <line x1="380" y1="454" x2="553" y2="454" stroke="#6e5232" stroke-width="1"/>
+  <polygon points="600,448 607,455 600,462 593,455" fill="#6e5232" opacity="0.6"/>
+  <polygon points="600,450 605,455 600,460 595,455" fill="#6e5232"/>
+  <line x1="647" y1="454" x2="820" y2="454" stroke="#6e5232" stroke-width="1"/>
+
+  <!-- ── Date band ─────────────────────────────────────────────── -->
+  <rect x="34" y="472" width="1132" height="78" fill="url(#hatch)"/>
+  <rect x="34" y="472" width="1132" height="78" fill="#6e5232" fill-opacity="0.035"/>
+
+  <!-- Arabic date -->
+  <text x="600" y="499"
+    text-anchor="middle"
+    font-family="'Segoe UI', 'Arabic Typesetting', serif"
+    font-size="22"
+    fill="#161616">الجمعة ٢٦ يونيو ٢٠٢٦</text>
+
+  <!-- English date -->
+  <text x="600" y="534"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="26"
+    fill="#161616">Friday, 26 June 2026</text>
+
+  <!-- ── Time ───────────────────────────────────────────────────── -->
+  <text x="600" y="572"
+    text-anchor="middle"
+    font-family="Arial, 'Helvetica Neue', sans-serif"
+    font-size="11"
+    fill="#6e5232"
+    letter-spacing="5">7:00 IN THE EVENING</text>
+
+  <!-- ── Hashtag ───────────────────────────────────────────────── -->
+  <text x="600" y="606"
+    text-anchor="middle"
+    font-family="Arial, 'Helvetica Neue', sans-serif"
+    font-size="11"
+    fill="#9c7748"
+    letter-spacing="4">#AhmedAndReham</text>
+
+  <!-- ── Tiny tennis ball accent (bottom-right) ────────────────── -->
+  <circle cx="1130" cy="548" r="22"
+    fill="none" stroke="#6e5232" stroke-width="0.8" stroke-opacity="0.25"/>
+  <circle cx="1130" cy="548" r="18"
+    fill="radial-gradient(circle at 38% 32%, #eaff5e, #c9dd2f 66%, #a7bd22)"/>
+  <!-- fallback solid fill for scrapers that don't support radial-gradient in fill -->
+  <circle cx="1130" cy="548" r="18" fill="#c9dd2f" opacity="0.9"/>
+  <path d="M 1117,533 Q 1124,548 1117,563" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 1143,533 Q 1136,548 1143,563" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

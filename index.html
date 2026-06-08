@@ -1,21 +1,39 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
-    <meta name="description" content="Wedding Invitation — Ahmed &amp; Reham" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Together with their families, Ahmed &amp; Reham request the honour of your presence at their wedding celebration — Friday, 26 June 2026 · 7:00 in the evening" />
     <title>Ahmed &amp; Reham — Wedding Invitation</title>
 
-    <!-- Google Fonts: Cormorant Garamond (Latin display) + Aref Ruqaa (Arabic display) + Amiri (Arabic body) + Reem Kufi (labels) -->
+    <!-- ── Social media / Open Graph ─────────────────────────────
+         Update og:url to your hosted domain once deployed.
+         Replace assets/og-image.png with a 1200×630 export of og-image.svg.
+    ──────────────────────────────────────────────────────────────── -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="Wedding Invitation" />
+    <meta property="og:title"       content="Ahmed &amp; Reham — Wedding Invitation" />
+    <meta property="og:description" content="Together with their families, Ahmed &amp; Reham request the honour of your presence at their wedding celebration — Friday, 26 June 2026 · 7:00 in the evening" />
+    <meta property="og:image"       content="assets/og-image.png" id="og-image" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type"   content="image/png" />
+    <meta property="og:image:alt"    content="Ahmed &amp; Reham — Wedding Invitation, 26 June 2026" />
+    <meta property="og:url"         content="" id="og-url" />
+
+    <!-- ── Twitter / X Card ──────────────────────────────────────── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Ahmed &amp; Reham — Wedding Invitation" />
+    <meta name="twitter:description" content="Together with their families, Ahmed &amp; Reham request the honour of your presence at their wedding celebration — Friday, 26 June 2026 · 7:00 in the evening" />
+    <meta name="twitter:image"       content="assets/og-image.png" id="tw-image" />
+    <meta name="twitter:image:alt"   content="Ahmed &amp; Reham — Wedding Invitation, 26 June 2026" />
+
+    <!-- ── Browser chrome ────────────────────────────────────────── -->
+    <meta name="theme-color" content="#173a20" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Aref+Ruqaa:wght@400;700&family=Amiri:ital,wght@0,400;1,400&family=Reem+Kufi:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Aref+Ruqaa:wght@400;700&family=Amiri:ital,wght@0,400;1,400&family=Reem+Kufi:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- Styles — tokens must load first -->
     <link rel="stylesheet" href="styles/tokens.css" />
@@ -35,39 +53,25 @@
     <div class="petals" id="petals" aria-hidden="true"></div>
 
     <!-- ============================================================
-       ENVELOPE OVERLAY
+       TENNIS COURT OPENER
        ============================================================ -->
     <div class="envelope-scene" id="scene">
+      <img class="scene-bg" id="scene-bg" src="assets/court-gate.png" alt="" />
       <div
-        class="envelope"
-        id="envelope"
+        class="tennis-card"
+        id="tcard"
         role="button"
         tabindex="0"
-        aria-label="Open the wedding invitation"
+        aria-label="Drag the tennis ball up to open the invitation"
       >
-        <!-- Envelope body + inner pocket triangles -->
-        <div class="env-body">
-          <div class="env-pocket"></div>
-          <!-- Letter peeking from pocket -->
-          <div class="env-letter">
-            <div class="mini">
-              <b id="seal-mono2">A&amp;R</b>
-              <span>Wedding Invitation</span>
-            </div>
+        <div class="card-head" id="court-date">26 JUNE 2026</div>
+        <div class="op-names">
+          <span class="op-name" id="court-groom-i">A</span>
+          <div class="ball-wrap hop" id="ballwrap">
+            <div class="tennis-ball" id="ball"></div>
           </div>
-          <!-- Bottom triangle -->
-          <div class="env-bottom"></div>
+          <span class="op-name" id="court-bride-i">R</span>
         </div>
-
-        <!-- Envelope flap -->
-        <div class="env-flap"></div>
-
-        <!-- Ripple rings — "tap here" affordance -->
-        <span class="tap-ring" aria-hidden="true"></span>
-        <span class="tap-ring r2" aria-hidden="true"></span>
-
-        <!-- Wax seal -->
-        <div class="env-seal" id="seal" aria-hidden="true">A&amp;R</div>
       </div>
     </div>
 
@@ -102,6 +106,9 @@
             The Wedding Of
           </p>
 
+          <!-- Invitation line (Arabic + English) -->
+          <p class="invite-line reveal d2" id="invite-line"></p>
+
           <!-- Mihrab arch with couple names -->
           <div class="names reveal d3">
             <div class="arch">
@@ -112,8 +119,7 @@
               <div class="name-en" id="bride-en"></div>
             </div>
           </div>
-          <!-- Invitation line (Arabic + English) -->
-          <p class="invite-line reveal d2" id="invite-line"></p>
+
           <!-- Ornamental divider -->
           <div class="divider reveal d4" aria-hidden="true">
             <span class="line"></span>
@@ -139,6 +145,7 @@
             class="countdown reveal d5"
             id="countdown"
             aria-label="Countdown to the wedding"
+            style="margin-top: clamp(20px, 4vw, 30px)"
           >
             <div class="cd-unit">
               <div class="cd-num" id="cd-d">00</div>
@@ -162,7 +169,7 @@
           </div>
 
           <!-- Qur'anic verse -->
-          <div class="verse reveal d6">
+          <div class="verse reveal d6" style="margin: clamp(26px, 5vw, 40px) 0">
             <div class="ar" id="verse-ar"></div>
             <p class="en" id="verse-en"></p>
             <div class="ref" id="verse-ref"></div>
@@ -204,9 +211,7 @@
           </div>
           <p class="hashtag reveal d7" id="hashtag"></p>
         </div>
-        <!-- .inner -->
       </div>
-      <!-- .card -->
     </main>
 
     <!-- ============================================================
@@ -228,7 +233,6 @@
     <script src="scripts/petals.js"></script>
     <script src="scripts/music.js"></script>
     <script src="scripts/envelope.js"></script>
-    <script src="scripts/scroll.js"></script>
     <script src="scripts/main.js"></script>
   </body>
 </html>

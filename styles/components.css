@@ -1,5 +1,5 @@
 /* ================================================================
-   COMPONENTS — envelope, card, arch, countdown, verse, music btn
+   COMPONENTS — tennis opener, card, arch, countdown, verse, music
    ================================================================ */
 
 /* ── Shared gold-foil text effect ─────────────────────────────── */
@@ -11,156 +11,102 @@
 }
 
 /* ================================================================
-   ENVELOPE
+   TENNIS COURT OPENER
    ================================================================ */
 
-.envelope {
+/* The floating card in the court scene */
+.tennis-card {
   position: relative;
-  width: min(86vw, 420px);
-  aspect-ratio: 7 / 5;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 1s ease 0.5s, opacity 0.8s ease 0.7s;
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.55));
-  animation: env-bob 3.6s ease-in-out infinite;
-}
-
-/* Pause float on hover — flap teases open as desktop affordance */
-.envelope:hover { animation-play-state: paused; }
-.envelope:hover .env-flap { transform: rotateX(22deg); }
-
-/* Stop floating once open */
-.envelope-scene.opening .envelope,
-.envelope-scene.opened  .envelope { animation: none; }
-.envelope-scene.opened  .envelope { transform: translateY(140%) scale(0.85); opacity: 0; }
-
-/* Envelope body */
-.env-body {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(150deg, var(--env-body-lt), var(--env-body-dk));
-  border: 1px solid rgba(184, 144, 47, 0.5);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-/* Inner pocket triangles */
-.env-pocket { position: absolute; inset: 0; }
-.env-pocket::before,
-.env-pocket::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 50%;
-  height: 72%;
-}
-.env-pocket::before {
-  left: 0;
-  background: linear-gradient(125deg, var(--env-pocket-lt), var(--env-pocket-dk));
-  clip-path: polygon(0 0, 100% 100%, 0 100%);
-}
-.env-pocket::after {
-  right: 0;
-  background: linear-gradient(235deg, var(--env-pocket-lt), var(--env-pocket-dk));
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
-
-/* Bottom triangle */
-.env-bottom {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 78%;
-  background: linear-gradient(160deg, var(--env-bottom-lt), var(--env-bottom-dk));
-  clip-path: polygon(0 100%, 50% 18%, 100% 100%);
-  border-top: 1px solid rgba(184, 144, 47, 0.25);
-}
-
-/* The letter that peeks up */
-.env-letter {
-  position: absolute;
-  left: 6%; right: 6%;
-  bottom: 6%;
-  height: 120%;
-  background: var(--env-letter-bg);
-  border: 1px solid rgba(184, 144, 47, 0.35);
-  border-radius: 4px;
-  z-index: 1;
-  transform: translateY(0);
-  transition: transform 1s var(--ease-letter) 0.15s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.envelope-scene.opening .env-letter { transform: translateY(-58%); }
-
-.env-letter .mini { text-align: center; color: var(--gold); font-family: var(--ar-display); }
-.env-letter .mini b    { display: block; font-size: clamp(26px, 7vw, 40px); line-height: 1; }
-.env-letter .mini span { font-family: var(--kufi); font-size: 11px; letter-spacing: 0.3em; color: var(--ink-soft); text-transform: uppercase; }
-
-/* Envelope flap */
-.env-flap {
-  position: absolute;
-  left: 0; top: 0;
-  width: 100%; height: 78%;
-  background: linear-gradient(160deg, var(--env-flap-lt), var(--env-flap-dk));
-  clip-path: polygon(0 0, 100% 0, 50% 92%);
-  transform-origin: top;
-  transform: rotateX(0deg);
-  transition: transform 0.9s var(--ease-envelope);
   z-index: 3;
-  border-bottom: 1px solid rgba(184, 144, 47, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 6vh, 48px);
+  padding: 0 6vw;
+  text-align: center;
+  cursor: default;
+  transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.35s,
+              opacity 0.8s ease 0.4s;
+  animation: card-bob 5s ease-in-out infinite;
 }
-.envelope-scene.opening .env-flap { transform: rotateX(180deg); z-index: 0; }
+.tennis-card:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 10px;
+  border-radius: 8px;
+}
+.envelope-scene.opening .tennis-card,
+.envelope-scene.opened  .tennis-card { animation: none; }
+.envelope-scene.opening .tennis-card  { transform: translateY(26px) scale(0.97); opacity: 0; }
 
-/* Wax seal */
-.env-seal {
-  position: absolute;
-  left: 50%; top: 46%;
-  width: clamp(58px, 15vw, 82px);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, var(--env-seal-lt), var(--env-seal-dk) 60%, var(--env-seal-edge));
-  box-shadow:
-    0 4px 14px rgba(0,0,0,0.4),
-    inset 0 2px 6px rgba(255,255,255,0.35),
-    inset 0 -4px 8px rgba(0,0,0,0.3);
-  z-index: 5;
+/* Date chip */
+.card-head {
+  font-family: var(--kufi);
+  font-size: clamp(10px, 2.6vw, 12px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.26);
+  padding: 7px 16px;
+  border-radius: 22px;
+  white-space: nowrap;
+}
+
+/* Names + & on one horizontal line */
+.op-names {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: clamp(14px, 4vw, 34px);
+  flex-wrap: nowrap;
+}
+.op-name {
   font-family: var(--ar-display);
-  color: var(--env-seal-text);
-  font-size: clamp(16px, 4.4vw, 22px);
-  letter-spacing: 0.02em;
-  transition: transform 0.5s ease, opacity 0.4s ease;
-  animation: seal-pulse 2.4s ease-in-out infinite;
+  font-weight: 600;
+  color: #fff;
+  font-size: clamp(52px, 15vw, 104px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6), 0 1px 4px rgba(0, 0, 0, 0.5);
 }
-.env-seal::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(60, 44, 18, 0.45);
-}
-.envelope-scene.opening .env-seal { animation: none; transform: translate(-50%, -50%) scale(0); opacity: 0; }
 
-/* Ripple tap-affordance rings */
-.tap-ring {
-  position: absolute;
-  left: 50%; top: 46%;
-  width: clamp(58px, 15vw, 82px);
+/* Draggable tennis ball wrapper */
+.ball-wrap {
+  position: relative;
+  z-index: 4;
+  will-change: transform;
+}
+.ball-wrap.hop { animation: ball-hop 1.7s ease-in-out infinite; }
+.ball-wrap.grab .tennis-ball { cursor: grabbing; }
+
+/* The tennis ball */
+.tennis-ball {
+  width: clamp(50px, 14vw, 66px);
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 2px solid var(--gold-light);
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  z-index: 4;
-  pointer-events: none;
-  animation: tap-ripple 2.4s ease-out infinite;
+  background: radial-gradient(circle at 34% 28%, #eaff5e, #c9dd2f 66%, #a7bd22);
+  box-shadow:
+    0 7px 16px rgba(0, 0, 0, 0.45),
+    inset -3px -4px 9px rgba(0, 0, 0, 0.2),
+    inset 3px 3px 8px rgba(255, 255, 255, 0.55);
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
 }
-.tap-ring.r2 { animation-delay: 1.2s; }
-.envelope-scene.opening .tap-ring { animation: none; opacity: 0; }
+/* Curved seam lines */
+.tennis-ball::before,
+.tennis-ball::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  width: 142%;
+  height: 142%;
+  top: -21%;
+  border-radius: 50%;
+  border: 5px solid #f6fae0;
+}
+.tennis-ball::before { left: -107%; }
+.tennis-ball::after  { left: 65%; }
 
 /* ================================================================
    INVITATION CARD
@@ -171,7 +117,7 @@
   width: min(100%, 640px);
   background: linear-gradient(180deg, var(--cream-light), var(--cream-card));
   padding: clamp(34px, 7vw, 68px) clamp(22px, 6vw, 58px);
-  box-shadow: 0 28px 70px -28px rgba(70, 55, 36, 0.45);
+  box-shadow: 0 28px 70px -28px rgba(40, 30, 18, 0.45);
 }
 
 /* Double ornamental gold frame */
@@ -186,7 +132,7 @@
   content: "";
   position: absolute;
   inset: 16px;
-  border: 0.8px solid rgba(184, 144, 47, 0.55);
+  border: 0.8px solid rgba(110, 82, 50, 0.55);
   pointer-events: none;
 }
 
@@ -195,7 +141,7 @@
   position: absolute;
   width: 13px;
   height: 13px;
-  background: var(--gold-gradient);
+  background: var(--clay-gradient);
   transform: rotate(45deg);
   z-index: 2;
   box-shadow: 0 0 0 3px var(--cream);
@@ -226,7 +172,7 @@
 }
 .divider .line   { height: 1px; width: clamp(40px, 16vw, 90px); background: linear-gradient(90deg, transparent, var(--gold)); }
 .divider .line.r { background: linear-gradient(90deg, var(--gold), transparent); }
-.divider .gem    { width: 8px;  height: 8px;  background: var(--gold-gradient); transform: rotate(45deg); }
+.divider .gem    { width: 8px;  height: 8px;  background: var(--clay-gradient); transform: rotate(45deg); }
 .divider .gem.sm { width: 5px;  height: 5px;  opacity: 0.7; }
 
 /* ── Eyebrow label ────────────────────────────────────────────── */
@@ -270,7 +216,7 @@
   content: "";
   position: absolute;
   inset: 5px;
-  border: 0.8px solid rgba(184, 144, 47, 0.5);
+  border: 0.8px solid rgba(110, 82, 50, 0.5);
   border-radius: 50% 50% 4px 4px / 42% 42% 4px 4px;
 }
 
@@ -315,8 +261,7 @@
   justify-content: center;
   gap: clamp(8px, 3vw, 22px);
   flex-wrap: wrap;
-  margin-top: clamp(20px, 4vw, 30px);
-  direction: ltr;               /* always read left-to-right regardless of page dir */
+  direction: ltr;
 }
 .cd-unit { min-width: clamp(58px, 17vw, 80px); }
 .cd-num {
@@ -349,17 +294,16 @@
 /* ── Verse block ──────────────────────────────────────────────── */
 .verse {
   position: relative;
-  margin: clamp(26px, 5vw, 40px) 0;
   padding: clamp(22px, 5vw, 34px) clamp(18px, 5vw, 40px);
   background:
-    repeating-linear-gradient(45deg, rgba(184,144,47,.05) 0 1px, transparent 1px 14px),
-    rgba(184, 144, 47, 0.04);
-  border-top:    1px solid rgba(184, 144, 47, 0.35);
-  border-bottom: 1px solid rgba(184, 144, 47, 0.35);
+    repeating-linear-gradient(45deg, rgba(110,82,50,.05) 0 1px, transparent 1px 14px),
+    rgba(110, 82, 50, 0.04);
+  border-top:    1px solid rgba(110, 82, 50, 0.35);
+  border-bottom: 1px solid rgba(110, 82, 50, 0.35);
 }
 .verse .ar  { font-family: var(--ar-body); font-size: clamp(18px, 4.8vw, 26px); line-height: 2; color: var(--ink); }
 .verse .en  { font-style: italic; color: var(--ink-soft); font-size: clamp(14px, 3.4vw, 17px); max-width: 36ch; margin: 1em auto 0; line-height: 1.55; text-wrap: balance; }
-.verse .ref { font-family: var(--kufi); letter-spacing: 0.24em; text-transform: uppercase; font-size: clamp(9px, 2.2vw, 11px); color: var(--gold); margin-top: 1.1em; }
+.verse .ref { font-family: var(--kufi); letter-spacing: 0.24em; text-transform: uppercase; font-size: clamp(9px, 2.2vw, 11px); color: var(--ink); margin-top: 1.1em; }
 
 /* ── Venue ────────────────────────────────────────────────────── */
 .venue-name { font-size: clamp(19px, 4.8vw, 26px); }
@@ -387,7 +331,7 @@
   border-radius: 2px;
   min-height: 44px;
 }
-.maps-btn:hover  { background: var(--gold-gradient); color: var(--env-seal-text); transform: translateY(-2px); }
+.maps-btn:hover  { background: var(--clay-gradient); color: #f6efdd; transform: translateY(-2px); }
 .maps-btn:active { transform: translateY(0); }
 .maps-btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
 .maps-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
@@ -415,7 +359,7 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   font-size: clamp(11px, 2.8vw, 13px);
-  color: var(--gold);
+  color: var(--ink);
 }
 
 /* ── Petals ───────────────────────────────────────────────────── */
@@ -423,7 +367,7 @@
   position: absolute;
   top: -6%;
   width: 12px; height: 12px;
-  background: var(--gold-gradient);
+  background: var(--clay-gradient);
   border-radius: 0 100% 0 100%;
   opacity: 0;
   will-change: transform;
@@ -435,14 +379,14 @@
   width: 54px; height: 54px;
   border-radius: 50%;
   border: 1.5px solid var(--gold);
-  background: rgba(251, 246, 234, 0.85);
+  background: rgba(245, 237, 221, 0.85);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   color: var(--gold);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 22px -8px rgba(70, 55, 36, 0.5);
+  box-shadow: 0 8px 22px -8px rgba(40, 30, 18, 0.5);
   transition: transform 0.3s ease, opacity 0.6s ease 1.8s;
   opacity: 0;
 }
@@ -458,7 +402,7 @@
   animation: disc-spin 4s linear infinite;
   animation-play-state: paused;
 }
-.music-btn.playing .disc  { animation-play-state: running; }
+.music-btn.playing .disc { animation-play-state: running; }
 .music-btn .disc::after {
   content: "";
   position: absolute;

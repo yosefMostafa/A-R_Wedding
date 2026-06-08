@@ -9,52 +9,44 @@
 
 :root {
   /* ── Cream palette ───────────────────────────────────────────── */
-  --cream:        #f6efe0;
-  --cream-deep:   #ece0c8;
-  --cream-light:  #fbf6ea;
-  --cream-card:   #f3ead6;
+  --cream:        #f1e7d3;
+  --cream-deep:   #e2d4b9;
+  --cream-light:  #f6efdd;
+  --cream-card:   #ebdfc5;
 
-  /* ── Gold scale ──────────────────────────────────────────────── */
-  --gold:         #b8902f;
-  --gold-light:   #d8bb6e;
-  --gold-bright:  #ecd597;
-  --gold-dark:    #9c7420;
-  --gold-darker:  #7c5a16;
-  --gold-deep:    #a87d22;
+  /* ── Gold / clay scale ───────────────────────────────────────── */
+  --gold:         #6e5232;
+  --gold-light:   #9c7748;
+  --gold-bright:  #c6a06a;
+  --clay:         #6e5232;
 
   /* ── Ink (text) ──────────────────────────────────────────────── */
-  --ink:          #463724;
-  --ink-soft:     #7a674b;
-  --ink-muted:    #9e8a6e;
+  --ink:          #161616;
+  --ink-soft:     #3c3a36;
+  --ink-muted:    #6b635a;
 
-  /* ── Envelope dark background ────────────────────────────────── */
-  --env-bg-center:  #2a2114;
-  --env-bg-edge:    #15100a;
+  /* ── Court scene background ──────────────────────────────────── */
+  --court-bg:     #173a20;
 
-  /* ── Gold gradient (metallic foil effect) ────────────────────── */
+  /* ── Gold gradient (dark metallic foil — for text & headings) ── */
   --gold-gradient: linear-gradient(
     135deg,
-    #a87d22 0%,
-    #e8cd86 35%,
-    #b8902f 55%,
-    #f2dca0 75%,
-    #9c7420 100%
+    #141414 0%,
+    #2c2c2c 32%,
+    #0f0f0f 54%,
+    #2c2c2c 74%,
+    #141414 100%
   );
 
-  /* ── Envelope parchment shades (3-D lighting on paper) ──────── */
-  --env-body-lt:      #f3ead7;
-  --env-body-dk:      #e4d4b0;
-  --env-pocket-lt:    #ecdcbb;
-  --env-pocket-dk:    #dcc79b;
-  --env-bottom-lt:    #efe1c4;
-  --env-bottom-dk:    #e0cda3;
-  --env-flap-lt:      #f0e2c6;
-  --env-flap-dk:      #e2cfa4;
-  --env-letter-bg:    #fbf6ea;
-  --env-seal-lt:      #caa23e;
-  --env-seal-dk:      #9c7420;
-  --env-seal-edge:    #7c5a16;
-  --env-seal-text:    #3a2c12;
+  /* ── Clay gradient (warm earthy — decorative elements) ──────── */
+  --clay-gradient: linear-gradient(
+    135deg,
+    #4a3720 0%,
+    #9a7445 32%,
+    #6e5232 54%,
+    #bb9263 74%,
+    #41301a 100%
+  );
 
   /* ── Font stacks ─────────────────────────────────────────────── */
   --serif:      "Cormorant Garamond", Georgia, serif;
@@ -63,18 +55,18 @@
   --kufi:       "Reem Kufi", sans-serif;
 
   /* ── Motion ──────────────────────────────────────────────────── */
-  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-envelope:  cubic-bezier(0.6, 0, 0.3, 1);
-  --ease-letter:    cubic-bezier(0.5, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-serve:    cubic-bezier(0.4, 0, 0.5, 1);
+  --ease-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Reduced motion — disable all animations globally */
 @media (prefers-reduced-motion: reduce) {
   .petal,
   .music-btn .disc,
-  .envelope,
-  .env-seal,
-  .tap-ring {
+  .tennis-card,
+  .ball-wrap,
+  .envelope-scene::after {
     animation: none !important;
   }
   .reveal {
