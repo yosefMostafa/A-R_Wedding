@@ -98,7 +98,11 @@ function initEnvelope() {
       if (window._playWeddingMusic) window._playWeddingMusic();
     }, 720);
     setTimeout(function () { scene.classList.add('opened'); }, 980);
-    setTimeout(function () { inv.classList.add('show'); }, 1180);
+    setTimeout(function () {
+      window.scrollTo(0, 0);
+      inv.classList.add('show');
+      if (window.initScrollReveal) window.initScrollReveal();
+    }, 1180);
   }
 
   /* Pointer events (covers mouse + touch + pen) */

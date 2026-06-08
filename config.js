@@ -22,9 +22,9 @@ window.WEDDING_CONFIG = {
   /* ---- DATE & TIME --------------------------------------------------
      dateISO drives the LIVE COUNTDOWN — use 24-hour: YYYY-MM-DDTHH:MM:SS
      The display strings below are what people actually read. */
-  dateISO: "2026-06-26T19:00:00",
+  dateISO: "2026-06-26T17:30:00",
   date:    { en: "Friday, 26 June 2026",  ar: "الجمعة ٢٦ يونيو ٢٠٢٦" },
-  time:    { en: "7:00 in the evening",   ar: "السابعة مساءً" },
+  time:    { en: "5:30 in the evening",   ar: "الخامسة والنصف مساءً" },
 
   /* ---- INVITATION LINE ---------------------------------------------- */
   invite: {
@@ -37,9 +37,9 @@ window.WEDDING_CONFIG = {
      mapsUrl. The "Open in Google Maps" button stays disabled until you
      add that link. Leave mapsUrl as "" until you have it. */
   venue: {
-    name:    { en: "Venue to be announced",     ar: "يُعلن عن المكان لاحقاً" },
-    address: { en: "Location details coming soon", ar: "تفاصيل الموقع قريباً" },
-    mapsUrl: ""   // e.g. "https://maps.google.com/?q=..." or a share link
+    name:    { en: "Al-Hassan Mosque", ar: "مسجد الحسن" },
+    address: { en: "New Cairo 1", ar: "القاهرة الجديدة ١" },
+    mapsUrl: "https://www.google.com/maps/place/%D9%85%D8%B3%D8%AC%D8%AF+%D8%A7%D9%84%D8%AD%D8%B3%D9%86%E2%80%AD/@30.0317007,31.4708801,941m/data=!3m2!1e3!4b1!4m6!3m5!1s0x145823000ea9641d:0x6469fd37f3b2c76!8m2!3d30.0317007!4d31.4708801!16s%2Fg%2F11x7gsqqhd?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D"
   },
 
   /* ---- BLESSING (Qur'an, Ar-Rum 30:21) ------------------------------

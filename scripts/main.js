@@ -96,21 +96,39 @@
       if (el) el.setAttribute('content', val);
     }
 
-    /* Rewrite title and description with live config values */
-    var title = groomEn + ' & ' + brideEn + ' — Wedding Invitation';
-    var dateStr = (C.date && C.date.en) || '';
-    var timeStr = (C.time && C.time.en) || '';
-    var desc = (C.invite && C.invite.en)
-      ? C.invite.en + (dateStr ? ' — ' + dateStr : '') + (timeStr ? ' · ' + timeStr : '')
-      : (dateStr ? dateStr : '');
+    /* Bilingual title: Arabic | English */
+    var groomAr  = (C.groom && C.groom.ar) || '';
+    var brideAr  = (C.bride && C.bride.ar) || '';
+    var titleAr  = groomAr + ' و' + brideAr + ' — دعوة زفاف';
+    var titleEn  = groomEn + ' & ' + brideEn + ' — Wedding Invitation';
+    var title    = titleAr + ' | ' + titleEn;
 
-    var allMeta = document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]');
-    for (var i = 0; i < allMeta.length; i++) {
-      var m = allMeta[i];
-      var key = m.getAttribute('property') || m.getAttribute('name');
-      if (key === 'og:title' || key === 'twitter:title') m.setAttribute('content', title);
-      if (key === 'og:description' || key === 'twitter:description') m.setAttribute('content', desc);
-    }
+    /* Bilingual description: Arabic line then English line */
+    var dateAr = (C.date && C.date.ar) || '';
+    var timeAr = (C.time && C.time.ar) || '';
+    var dateEn = (C.date && C.date.en) || '';
+    var timeEn = (C.time && C.time.en) || '';
+    var inviteAr = (C.invite && C.invite.ar) || '';
+    var inviteEn = (C.invite && C.invite.en) || '';
+
+    var descAr = inviteAr
+      + (dateAr ? ' — ' + dateAr : '')
+      + (timeAr ? ' · ' + timeAr : '');
+    var descEn = inviteEn
+      + (dateEn ? ' — ' + dateEn : '')
+      + (timeEn ? ' · ' + timeEn : '');
+    var desc = descAr + '\n' + descEn;
+
+    /* Update all title/description meta tags and the page title */
+    document.title = title;
+    setMeta('og-title', title);
+    setMeta('og-desc',  desc);
+    setMeta('tw-title', title);
+    setMeta('tw-desc',  desc);
+
+    /* Also sync the plain <meta name="description"> */
+    var plainDesc = document.querySelector('meta[name="description"]');
+    if (plainDesc) plainDesc.setAttribute('content', desc);
 
     /* Inject absolute URL only when siteUrl is configured */
     if (base) {
@@ -126,6 +144,76 @@
       canonical.href = urlPath;
     }
   })();
+
+  /* ── Scroll-reveal + auto-scroll ────────────────────────────── */
+  window.initScrollReveal = function () {
+    /* IntersectionObserver: animate each section as it enters view */
+    var io = new IntersectionObserver(function (entries) {
+      var batch = 0;
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          el.style.transitionDelay = (batch * 0.11) + 's';
+          el.classList.add('in-view');
+          io.unobserve(el);
+          batch++;
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -16px 0px' });
+
+    document.querySelectorAll('#invitation .reveal').forEach(function (el) {
+      io.observe(el);
+    });
+
+    /* Auto-scroll: slow cinematic drift down; stops on any interaction */
+    var rafId = null;
+    var stopped = false;
+
+    function stop() {
+      if (stopped) return;
+      stopped = true;
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      window.removeEventListener('wheel',       stop);
+      window.removeEventListener('touchstart',  stop);
+      window.removeEventListener('pointerdown', stop);
+      window.removeEventListener('keydown',     stop);
+    }
+
+    var accum = 0;
+    function tick() {
+      if (stopped) return;
+      var atBottom = (window.pageYOffset + window.innerHeight) >=
+                     (document.documentElement.scrollHeight - 4);
+      if (atBottom) { stop(); return; }
+      accum += 0.2;              /* 0.2 px/frame ≈ 12 px/sec at 60 fps */
+      if (accum >= 1) { window.scrollBy(0, 1); accum -= 1; }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    /* Give the first section time to fully animate in before drifting */
+    var startTimer = setTimeout(function () {
+      if (stopped) return;
+      window.addEventListener('wheel',       stop, { passive: true });
+      window.addEventListener('touchstart',  stop, { passive: true });
+      window.addEventListener('pointerdown', stop, { passive: true });
+      window.addEventListener('keydown',     stop);
+      rafId = requestAnimationFrame(tick);
+    }, 1800);
+
+    /* If user touches before the timer fires, cancel it too */
+    function earlyStop() {
+      clearTimeout(startTimer);
+      stop();
+      window.removeEventListener('wheel',       earlyStop);
+      window.removeEventListener('touchstart',  earlyStop);
+      window.removeEventListener('pointerdown', earlyStop);
+      window.removeEventListener('keydown',     earlyStop);
+    }
+    window.addEventListener('wheel',       earlyStop, { passive: true });
+    window.addEventListener('touchstart',  earlyStop, { passive: true });
+    window.addEventListener('pointerdown', earlyStop, { passive: true });
+    window.addEventListener('keydown',     earlyStop);
+  };
 
   /* ── Init modules ────────────────────────────────────────────── */
   initCountdown(C);

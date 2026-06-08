@@ -114,9 +114,9 @@
 
 .card {
   position: relative;
-  width: min(100%, 640px);
+  width: min(92vw, 430px);
   background: linear-gradient(180deg, var(--cream-light), var(--cream-card));
-  padding: clamp(34px, 7vw, 68px) clamp(22px, 6vw, 58px);
+  padding: clamp(34px, 7vw, 52px) clamp(22px, 6vw, 32px);
   box-shadow: 0 28px 70px -28px rgba(40, 30, 18, 0.45);
 }
 
@@ -253,7 +253,7 @@
   text-transform: uppercase;
   margin-top: 0.5em;
 }
-.date-time .ar { font-family: var(--ar-body); letter-spacing: 0; font-size: 1.25em; }
+.date-time .ar { font-family: var(--ar-body); letter-spacing: 0; font-size: 1.25em; display: block; margin-bottom: 0.2em; }
 
 /* ── Countdown ────────────────────────────────────────────────── */
 .countdown {
@@ -394,21 +394,12 @@
 .music-btn:hover   { transform: scale(1.08); }
 .music-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
-.music-btn .disc {
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  border: 2px solid currentColor;
-  position: relative;
-  animation: disc-spin 4s linear infinite;
-  animation-play-state: paused;
+.music-btn .music-note {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
 }
-.music-btn.playing .disc { animation-play-state: running; }
-.music-btn .disc::after {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border-radius: 50%;
-  background: currentColor;
+.music-btn.playing .music-note {
+  animation: note-bob 0.65s ease-in-out infinite alternate;
 }
 .music-btn .bar {
   position: absolute;

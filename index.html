@@ -3,33 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Together with their families, Ahmed &amp; Reham request the honour of your presence at their wedding celebration — Friday, 26 June 2026 · 7:00 in the evening" />
-    <title>Ahmed &amp; Reham — Wedding Invitation</title>
+    <meta name="description" content="أحمد وريهام — دعوة زفاف | Ahmed &amp; Reham — Wedding Invitation" />
+    <title>أحمد وريهام — دعوة زفاف | Ahmed &amp; Reham — Wedding Invitation</title>
 
-    <!-- ── Social media / Open Graph ─────────────────────────────
-         Update og:url to your hosted domain once deployed.
-         Replace assets/og-image.png with a 1200×630 export of og-image.svg.
-    ──────────────────────────────────────────────────────────────── -->
+    <!-- ── Social media / Open Graph ──────────────────────────────── -->
     <meta property="og:type"        content="website" />
-    <meta property="og:site_name"   content="Wedding Invitation" />
-    <meta property="og:title"       content="Ahmed &amp; Reham — Wedding Invitation" />
-    <meta property="og:description" content="Together with their families, Ahmed &amp; Reham request the honour of your presence at their wedding celebration — Friday, 26 June 2026 · 7:00 in the evening" />
+    <meta property="og:site_name"   content="حفل زفاف | Wedding Invitation" />
+    <meta property="og:locale"         content="ar_AR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:title"
+          content="أحمد وريهام — دعوة زفاف | Ahmed &amp; Reham — Wedding Invitation"
+          id="og-title" />
+    <meta property="og:description"
+          content="يتشرّفان مع عائلتيهما بدعوتكم لحضور حفل زفافهما — الجمعة ٢٦ يونيو ٢٠٢٦ · الخامسة والنصف مساءً &#10;Together with their families, request the honour of your presence — Friday, 26 June 2026 · 5:30 in the evening"
+          id="og-desc" />
     <meta property="og:image"       content="https://ahemd-reham.s-yosef-mostafa.workers.dev/assets/og-image.png" id="og-image" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type"   content="image/png" />
-    <meta property="og:image:alt"    content="Ahmed &amp; Reham — Wedding Invitation, 26 June 2026" />
+    <meta property="og:image:alt"    content="أحمد وريهام — دعوة زفاف | Ahmed &amp; Reham — Wedding Invitation, 26 June 2026" />
     <meta property="og:url"         content="https://ahemd-reham.s-yosef-mostafa.workers.dev/" id="og-url" />
 
     <!-- ── Twitter / X Card ──────────────────────────────────────── -->
     <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="Ahmed &amp; Reham — Wedding Invitation" />
-    <meta name="twitter:description" content="Together with their families, Ahmed &amp; Reham request the honour of your presence at their wedding celebration — Friday, 26 June 2026 · 7:00 in the evening" />
+    <meta name="twitter:title"       content="أحمد وريهام — دعوة زفاف | Ahmed &amp; Reham — Wedding Invitation" id="tw-title" />
+    <meta name="twitter:description" content="يتشرّفان مع عائلتيهما بدعوتكم لحضور حفل زفافهما — الجمعة ٢٦ يونيو ٢٠٢٦ · الخامسة والنصف مساءً &#10;Together with their families, request the honour of your presence — Friday, 26 June 2026 · 5:30 in the evening" id="tw-desc" />
     <meta name="twitter:image"       content="https://ahemd-reham.s-yosef-mostafa.workers.dev/assets/og-image.png" id="tw-image" />
-    <meta name="twitter:image:alt"   content="Ahmed &amp; Reham — Wedding Invitation, 26 June 2026" />
+    <meta name="twitter:image:alt"   content="أحمد وريهام — دعوة زفاف | Ahmed &amp; Reham — Wedding Invitation" />
 
     <!-- ── Browser chrome ────────────────────────────────────────── -->
     <meta name="theme-color" content="#173a20" />
+    <link rel="icon" type="image/svg+xml"  href="assets/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png" />
+    <link rel="apple-touch-icon"           href="assets/favicon-64.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -106,8 +112,7 @@
             The Wedding Of
           </p>
 
-          <!-- Invitation line (Arabic + English) -->
-          <p class="invite-line reveal d2" id="invite-line"></p>
+         
 
           <!-- Mihrab arch with couple names -->
           <div class="names reveal d3">
@@ -119,7 +124,8 @@
               <div class="name-en" id="bride-en"></div>
             </div>
           </div>
-
+ <!-- Invitation line (Arabic + English) -->
+          <p class="invite-line reveal d2" id="invite-line"></p>
           <!-- Ornamental divider -->
           <div class="divider reveal d4" aria-hidden="true">
             <span class="line"></span>
@@ -136,7 +142,6 @@
           </div>
           <div class="date-time reveal d4">
             <span class="ar" id="time-ar"></span>
-            &nbsp;&bull;&nbsp;
             <span id="time-en"></span>
           </div>
 
@@ -223,7 +228,11 @@
       aria-label="Toggle background music"
       title="Music"
     >
-      <span class="disc"></span>
+      <svg class="music-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true">
+        <path d="M9 18V5l12-2v13"/>
+        <circle cx="6" cy="18" r="3"/>
+        <circle cx="18" cy="16" r="3"/>
+      </svg>
       <span class="bar" aria-hidden="true"></span>
     </button>
     <audio id="audio" loop preload="none"></audio>
