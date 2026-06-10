@@ -22,14 +22,14 @@ window.WEDDING_CONFIG = {
   /* ---- DATE & TIME --------------------------------------------------
      dateISO drives the LIVE COUNTDOWN — use 24-hour: YYYY-MM-DDTHH:MM:SS
      The display strings below are what people actually read. */
-  dateISO: "2026-06-26T17:30:00",
+  dateISO: "2026-06-26T18:30:00",
   date:    { en: "Friday, 26 June 2026",  ar: "الجمعة ٢٦ يونيو ٢٠٢٦" },
-  time:    { en: "5:30 in the evening",   ar: "الخامسة والنصف مساءً" },
+  time:    { en: "6:30 - 8:00 in the evening ",   ar: "السادسة والنصف  حتى الثامنة مساءً" },
 
   /* ---- INVITATION LINE ---------------------------------------------- */
   invite: {
-    en: "Together with their families, request the honour of your presence at the celebration of their marriage",
-    ar: "يتشرّفان مع عائلتيهما بدعوتكم لحضور حفل زفافهما"
+    en: "Together request the honour of your presence at the celebration of their marriage",
+    ar: "يتشرّفان بدعوتكم لحضور عقد قرانهما"
   },
 
   /* ---- VENUE --------------------------------------------------------

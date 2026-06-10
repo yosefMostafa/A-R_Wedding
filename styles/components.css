@@ -9,6 +9,9 @@
   background-clip: text;
   color: transparent;
 }
+.name-margin {
+  margin-bottom: 0.5em;
+}
 
 /* ================================================================
    TENNIS COURT OPENER
@@ -224,6 +227,7 @@
   font-family: var(--ar-display);
   font-size: clamp(40px, 12vw, 72px);
   line-height: 1.05;
+  
 }
 .name-en {
   font-family: var(--serif);
@@ -367,8 +371,8 @@
   position: absolute;
   top: -6%;
   width: 12px; height: 12px;
-  background: var(--clay-gradient);
-  border-radius: 0 100% 0 100%;
+  background: url('../assets/rose.png') center / contain no-repeat;
+  border-radius: 0;
   opacity: 0;
   will-change: transform;
   animation: petal-fall linear infinite;
