@@ -16,10 +16,9 @@ function initPetals(config) {
     var p = document.createElement('span');
     p.className = 'petal';
 
-    var size = 14 + Math.random() * 16;
-    p.style.left             = (Math.random() * 100) + '%';
-    p.style.width            = size + 'px';
-    p.style.height           = size + 'px';
+    p.style.left   = (Math.random() * 100) + '%';
+    p.style.width  = '14px';
+    p.style.height = '14px';
     p.style.setProperty('--drift', (Math.random() * 120 - 60) + 'px');
     p.style.animationDuration = (8 + Math.random() * 9) + 's';
     p.style.animationDelay    = (-Math.random() * 12) + 's';
