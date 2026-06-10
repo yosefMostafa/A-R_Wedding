@@ -10,12 +10,20 @@
   if (C.theme) {
     var r = document.documentElement.style;
     var map = {
-      cream:      '--cream',
-      creamDeep:  '--cream-deep',
-      gold:       '--gold',
-      goldLight:  '--gold-light',
-      goldBright: '--gold-bright',
-      ink:        '--ink'
+      cream:        '--cream',
+      creamDeep:    '--cream-deep',
+      creamLight:   '--cream-light',
+      creamCard:    '--cream-card',
+      gold:         '--gold',
+      goldLight:    '--gold-light',
+      goldBright:   '--gold-bright',
+      clay:         '--clay',
+      ink:          '--ink',
+      inkSoft:      '--ink-soft',
+      inkMuted:     '--ink-muted',
+      courtBg:      '--court-bg',
+      goldGradient: '--gold-gradient',
+      clayGradient: '--clay-gradient'
     };
     Object.keys(C.theme).forEach(function (k) {
       if (map[k]) r.setProperty(map[k], C.theme[k]);

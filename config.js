@@ -31,14 +31,14 @@ window.WEDDING_CONFIG = {
     en: "Together request the honour of your presence at the celebration of their marriage",
     ar: "يتشرّفان بدعوتكم لحضور عقد قرانهما"
   },
-
+  
   /* ---- VENUE --------------------------------------------------------
      Fill the name + address, then paste the Google Maps share link into
      mapsUrl. The "Open in Google Maps" button stays disabled until you
      add that link. Leave mapsUrl as "" until you have it. */
   venue: {
     name:    { en: "Al-Hassan Mosque", ar: "مسجد الحسن" },
-    address: { en: "New Cairo 1", ar: "القاهرة الجديدة ١" },
+    address: { en: "New Cairo ", ar: "التجمع الخامس البنفسج" },
     mapsUrl: "https://www.google.com/maps/place/%D9%85%D8%B3%D8%AC%D8%AF+%D8%A7%D9%84%D8%AD%D8%B3%D9%86%E2%80%AD/@30.0317007,31.4708801,941m/data=!3m2!1e3!4b1!4m6!3m5!1s0x145823000ea9641d:0x6469fd37f3b2c76!8m2!3d30.0317007!4d31.4708801!16s%2Fg%2F11x7gsqqhd?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D"
   },
 
@@ -64,17 +64,35 @@ window.WEDDING_CONFIG = {
      is empty, the button simply does nothing. */
   musicUrl: "music/nasheed.mp3",
 
-   /* ---- COLOR THEME --------------------------------------------------
-     To tweak colors, edit styles/tokens.css instead.
-     These overrides are applied on top of tokens.css at runtime.
-     Remove any key you don't want to override. */
+  /* ---- COLOR THEME --------------------------------------------------
+     Every color on the site is controlled here.
+     Defaults (tokens.css values) are shown in comments — change the
+     active value to retheme. Remove a key to fall back to the default. */
   theme: {
-    cream:      "#f1e7d3",
-    creamDeep:  "#e2d4b9",
-    gold:       "#6e5232",
-    goldLight:  "#9c7748",
-    goldBright: "#c6a06a",
-    ink:        "#161616"
+    /* ── Cream palette ───────────────────────────────────────────── */
+    cream:        "#ddbea9",   /* default: #f1e7d3  — page background    */
+    creamDeep:    "#cb997e",   /* default: #e2d4b9  — deep cream accent   */
+    creamLight:   "#eddcd2",   /* default: #f6efdd  — card top gradient   */
+    creamCard:    "#fff1e6",   /* default: #ebdfc5  — card bottom gradient */
+
+    /* ── Gold / clay scale ───────────────────────────────────────── */
+    gold:         "#b7b7a4",   /* default: #6e5232  — borders, dividers   */
+    goldLight:    "#b7b7a4",   /* default: #9c7748  — lighter accents     */
+    goldBright:   "#89a160",   /* default: #c6a06a  — highlights          */
+    clay:         "#6e5232",   /* default: #6e5232  — corner diamonds     */
+
+    /* ── Ink (text) ──────────────────────────────────────────────── */
+    ink:          "#50503f",   /* default: #161616  — primary text        */
+    inkSoft:      "#50503f",   /* default: #3c3a36  — secondary text      */
+    inkMuted:     "#50503f",   /* default: #6b635a  — muted text          */
+
+    /* ── Court scene ─────────────────────────────────────────────── */
+    courtBg:      "#173a20",   /* default: #173a20  — tennis court bg     */
+
+    /* ── Gradients (full CSS gradient strings) ───────────────────── */
+    /* Uncomment and edit to override the foil / decorative gradients */
+    goldGradient: "linear-gradient(135deg, #141414 0%, #2c2c2c 32%, #0f0f0f 54%, #2c2c2c 74%, #141414 100%)",
+    clayGradient: "linear-gradient(135deg, #50503f 0%, #b7b7a4 32%, #50503f 54%, #b7b7a4 74%, #50503f 100%)"
   }
 
 };
