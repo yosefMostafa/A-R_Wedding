@@ -161,7 +161,7 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           var el = entry.target;
-          el.style.transitionDelay = (batch * 0.11) + 's';
+          el.style.transitionDelay = (batch * 0.45) + 's';
           el.classList.add('in-view');
           io.unobserve(el);
           batch++;
