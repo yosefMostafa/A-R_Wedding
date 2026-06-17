@@ -126,3 +126,23 @@
 
 /* ── Hidden utility ───────────────────────────────────────────── */
 .hidden { display: none !important; }
+
+/* ── Developer footer ─────────────────────────────────────────── */
+.dev-footer {
+  margin-top: clamp(28px, 5vw, 44px);
+  font-family: var(--kufi);
+  font-size: clamp(10px, 2.2vw, 12px);
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  text-align: center;
+  opacity: 0.55;
+}
+.dev-footer a {
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.2s ease;
+}
+.dev-footer a:hover { opacity: 0.75; }
