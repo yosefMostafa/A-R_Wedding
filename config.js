@@ -37,7 +37,7 @@ window.WEDDING_CONFIG = {
      mapsUrl. The "Open in Google Maps" button stays disabled until you
      add that link. Leave mapsUrl as "" until you have it. */
   venue: {
-    name:    { en: "Al salam Hall - Al-Hafez Mosque", ar: " قاعة السلام - مسجد الحافظ" },
+    name:    { en: "Al Salam Hall - Al-Hafez Mosque", ar: " قاعة السلام - مسجد الحافظ" },
     address: { en: "Al Mokattam", ar: "المقطم" },
     mapsUrl: "https://maps.app.goo.gl/7h26DsRCpKXzdeF76"
   },
