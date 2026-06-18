@@ -81,6 +81,60 @@
 .ball-wrap.hop { animation: ball-hop 1.7s ease-in-out infinite; }
 .ball-wrap.grab .tennis-ball { cursor: grabbing; }
 
+/* Tap icon below the ball */
+.tap-hint {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  animation: tap-hint-float 1.6s ease-in-out infinite;
+  transition: opacity 0.25s ease;
+}
+.tap-hint-icon {
+  display: block;
+  width: clamp(26px, 7vw, 32px);
+  height: auto;
+  color: rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.55));
+}
+
+/* Circular orbit arrow around the ball */
+.tap-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(clamp(50px, 14vw, 66px) + 28px);
+  height: calc(clamp(50px, 14vw, 66px) + 28px);
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, 0.88);
+  border-right-color: transparent;
+  box-sizing: border-box;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.45));
+  animation: orbit-spin 3s linear infinite;
+}
+/* Arrowhead at the leading clockwise edge (~1:30, top-right of arc) */
+.tap-orbit::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 8%;
+  width: 10px;
+  height: 10px;
+  border-top: 2.5px solid rgba(255, 255, 255, 0.88);
+  border-right: 2.5px solid rgba(255, 255, 255, 0.88);
+  border-radius: 0 2px 0 0;
+  transform: rotate(90deg);
+}
+.ball-wrap.grab .tap-hint,
+.ball-wrap.grab .tap-orbit,
+.envelope-scene.opening .tap-hint,
+.envelope-scene.opening .tap-orbit,
+.envelope-scene.opened  .tap-hint,
+.envelope-scene.opened  .tap-orbit { opacity: 0; }
+
 /* The tennis ball */
 .tennis-ball {
   width: clamp(50px, 14vw, 66px);

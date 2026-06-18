@@ -14,6 +14,18 @@
   50%       { transform: translateY(-11px); }
 }
 
+/* ── Tap-here hint float ──────────────────────────────────────── */
+@keyframes tap-hint-float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(5px); }
+}
+
+/* ── Orbit arrow spin around ball ────────────────────────────── */
+@keyframes orbit-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 /* ── Stadium halo breathe ─────────────────────────────────────── */
 @keyframes halo-breathe {
   0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
