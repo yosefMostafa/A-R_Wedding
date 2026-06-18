@@ -138,7 +138,7 @@
   opacity: 0.72;
 }
 .dev-footer a {
-  color: var(--gold);
+  color: var(--ink);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
