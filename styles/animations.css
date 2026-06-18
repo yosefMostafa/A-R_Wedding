@@ -20,11 +20,6 @@
   50%       { transform: translateX(-50%) translateY(5px); }
 }
 
-/* ── Orbit arrow spin around ball ────────────────────────────── */
-@keyframes orbit-spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
-}
 
 /* ── Stadium halo breathe ─────────────────────────────────────── */
 @keyframes halo-breathe {

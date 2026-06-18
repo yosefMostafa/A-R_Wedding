@@ -131,18 +131,18 @@
 .dev-footer {
   margin-top: clamp(28px, 5vw, 44px);
   font-family: var(--kufi);
-  font-size: clamp(10px, 2.2vw, 12px);
+  font-size: clamp(12px, 2.6vw, 14px);
   letter-spacing: 0.12em;
-  color: var(--ink-muted);
+  color: var(--ink);
   text-align: center;
-  opacity: 0.55;
+  opacity: 0.72;
 }
 .dev-footer a {
-  color: var(--ink);
+  color: var(--gold);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 4px;
   transition: opacity 0.2s ease;
 }
-.dev-footer a:hover { opacity: 0.75; }
+.dev-footer a:hover { opacity: 0.85; }
