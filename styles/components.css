@@ -183,9 +183,9 @@
   font-size: clamp(15px, 3.6vw, 19px);
   font-style: italic;
   color: var(--ink-soft);
-  max-width: 30ch;
+  max-width: 100%;
   margin: 0 auto;
-  line-height: 1.55;
+  line-height: 1.75;
   text-wrap: balance;
 }
 .invite-line .ar {

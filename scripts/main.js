@@ -53,7 +53,11 @@
   /* ── Invitation line ─────────────────────────────────────────── */
   if (C.invite) {
     var il = $('invite-line');
-    if (il) il.innerHTML = '<span class="ar">' + C.invite.ar + '</span>' + C.invite.en;
+    if (il) {
+      var arHtml = C.invite.ar.replace(/\n/g, '<br>');
+      var enHtml = C.invite.en.replace(/\n/g, '<br>');
+      il.innerHTML = '<span class="ar">' + arHtml + '</span>' + enHtml;
+    }
   }
 
   /* ── Date & time ─────────────────────────────────────────────── */
@@ -116,8 +120,8 @@
     var timeAr = (C.time && C.time.ar) || '';
     var dateEn = (C.date && C.date.en) || '';
     var timeEn = (C.time && C.time.en) || '';
-    var inviteAr = (C.invite && C.invite.ar) || '';
-    var inviteEn = (C.invite && C.invite.en) || '';
+    var inviteAr = ((C.invite && C.invite.ar) || '').replace(/\n/g, ' ');
+    var inviteEn = ((C.invite && C.invite.en) || '').replace(/\n/g, ' ');
 
     var descAr = inviteAr
       + (dateAr ? ' — ' + dateAr : '')

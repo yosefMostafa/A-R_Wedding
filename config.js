@@ -28,8 +28,8 @@ window.WEDDING_CONFIG = {
 
   /* ---- INVITATION LINE ---------------------------------------------- */
   invite: {
-    en: "Together request the honour of your presence at the celebration of their marriage",
-    ar: "يتشرّفان بدعوتكم لحضور عقد قرانهما"
+    en: "Eng. Mostafa El-Desouky & Dr. Zaher Rawash\nrequest the honour of your presence at the celebration of the marriage of their son and daughter",
+    ar: "المهندس / مصطفى الدسوقى & الدكتور / زاهر رواش\nيتشرفان بدعوتكم لحضور عقد قران نجل الأول وكريمة الثاني"
   },
   
   /* ---- VENUE --------------------------------------------------------
