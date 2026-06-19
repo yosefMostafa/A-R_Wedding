@@ -90,6 +90,9 @@
   pointer-events: none;
   animation: tap-hint-float 1.6s ease-in-out infinite;
   transition: opacity 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .tap-hint-icon {
   display: block;
@@ -97,6 +100,17 @@
   height: auto;
   color: rgba(255, 255, 255, 0.95);
   filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.55));
+}
+.tap-hint-text {
+  display: block;
+  margin-top: 6px;
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: clamp(10px, 2.8vw, 13px);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: 0.04em;
 }
 
 .ball-wrap.grab .tap-hint,
