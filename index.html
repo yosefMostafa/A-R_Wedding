@@ -8,7 +8,7 @@
     />
     <meta
       name="description"
-      content="يسر يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما — الأحد ٤ أكتوبر ٢٠٢٦ · الثامن حتى الثاني عشر مساءً&#10;Youssef Ashraf &amp; Huda Hussain request the pleasure of your company at their wedding celebration — Sunday, 4 Oct 2026 · 8:00 - 12:00 in the evening"
+      content="يتشرف يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما — الأحد ٤ أكتوبر ٢٠٢٦ · الثامن حتى الثاني عشر مساءً&#10;Youssef Ashraf &amp; Huda Hussain request the pleasure of your company at their wedding celebration — Sunday, 4 Oct 2026 · 8:00 - 12:00 in the evening"
     />
     <title>
       يوسف وهدى — دعوة زفاف | Youssef &amp; Huda — Wedding Invitation
@@ -27,7 +27,7 @@
     />
     <meta
       property="og:description"
-      content="يسر يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما — الأحد ٤ أكتوبر ٢٠٢٦ · الثامن حتى الثاني عشر مساءً&#10;Youssef Ashraf &amp; Huda Hussain request the pleasure of your company at their wedding celebration — Sunday, 4 Oct 2026 · 8:00 - 12:00 in the evening"
+      content="يتشرف يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما — الأحد ٤ أكتوبر ٢٠٢٦ · الثامن حتى الثاني عشر مساءً&#10;Youssef Ashraf &amp; Huda Hussain request the pleasure of your company at their wedding celebration — Sunday, 4 Oct 2026 · 8:00 - 12:00 in the evening"
       id="og-desc"
     />
     <meta
@@ -57,7 +57,7 @@
     />
     <meta
       name="twitter:description"
-      content="يسر يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما — الأحد ٤ أكتوبر ٢٠٢٦ · الثامن حتى الثاني عشر مساءً&#10;Youssef Ashraf &amp; Huda Hussain request the pleasure of your company at their wedding celebration — Sunday, 4 Oct 2026 · 8:00 - 12:00 in the evening"
+      content="يتشرف يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما — الأحد ٤ أكتوبر ٢٠٢٦ · الثامن حتى الثاني عشر مساءً&#10;Youssef Ashraf &amp; Huda Hussain request the pleasure of your company at their wedding celebration — Sunday, 4 Oct 2026 · 8:00 - 12:00 in the evening"
       id="tw-desc"
     />
     <meta
@@ -104,26 +104,65 @@
        WEDDING ENVELOPE OPENER
        ============================================================ -->
     <div class="envelope-scene" id="scene">
-      <div class="env-letter-top" aria-hidden="true">
-        <span class="env-letter-names" id="env-names"></span>
-        <span class="env-letter-date" id="env-date"></span>
-      </div>
-      <div
-        class="envelope"
-        id="envelope"
-        role="button"
-        tabindex="0"
-        aria-label="Tap to open the wedding invitation"
-      >
-        <div class="env-flap-top"></div>
-        <div class="env-seal" id="env-seal">
-          <span class="env-seal-text" id="env-monogram">Y&amp;H</span>
+      <div class="envelope-stage" id="envelope-stage">
+        <div
+          class="envelope"
+          id="envelope"
+          role="button"
+          tabindex="0"
+          aria-label="Tap to open the wedding invitation"
+        >
+          <!-- FRONT: addressed side -->
+          <div class="env-face env-front">
+            <div class="env-edge" aria-hidden="true"></div>
+            <div class="env-address">
+              <span class="env-address-ar" lang="ar">إلى ضيوفنا الكرام</span>
+              <span class="env-address-to">To our beloved guest</span>
+              <span class="env-address-line"></span>
+              <span class="env-address-names" id="env-names"></span>
+              <span class="env-address-date" id="env-date"></span>
+            </div>
+            <div class="env-stamp" aria-hidden="true">
+              <span class="env-stamp-mono" id="env-stamp-mono">Y&amp;H</span>
+              <span class="env-stamp-year" id="env-stamp-year">2026</span>
+            </div>
+            <div class="env-postmark" aria-hidden="true">
+              <span class="env-postmark-date" id="env-postmark-date"></span>
+              <span class="env-postmark-place" id="env-postmark-place"></span>
+            </div>
+          </div>
+
+          <!-- BACK: flap, pocket, seal, letter -->
+          <div class="env-face env-back">
+            <div class="env-inside" aria-hidden="true"></div>
+            <div class="env-letter" id="env-letter" aria-hidden="true">
+              <div class="env-letter-frame">
+                <span class="env-letter-mono" id="env-letter-mono">Y&amp;H</span>
+                <span class="env-letter-rule"></span>
+                <span class="env-letter-names" id="env-letter-names"></span>
+                <span class="env-letter-date" id="env-letter-date"></span>
+              </div>
+            </div>
+            <div class="env-pocket" aria-hidden="true">
+              <div class="env-fold env-fold-left"></div>
+              <div class="env-fold env-fold-right"></div>
+              <div class="env-fold env-fold-bottom"></div>
+            </div>
+            <div class="env-flap" aria-hidden="true">
+              <div class="env-flap-outer"></div>
+              <div class="env-flap-inner"></div>
+            </div>
+            <div class="env-seal" id="env-seal">
+              <div class="env-seal-half env-seal-left" aria-hidden="true">
+                <span class="env-seal-text">Y&amp;H</span>
+              </div>
+              <div class="env-seal-half env-seal-right">
+                <span class="env-seal-text" id="env-monogram">Y&amp;H</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="env-body">
-          <div class="env-flap-left" aria-hidden="true"></div>
-          <div class="env-flap-right" aria-hidden="true"></div>
-          <div class="env-flap-bottom" aria-hidden="true"></div>
-        </div>
+
         <div class="env-hint" aria-hidden="true">
           <svg class="env-hint-icon" viewBox="0 0 42 46" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <!-- Tap rays from index fingertip -->
@@ -144,6 +183,16 @@
             <path d="M12 32 Q9 32 8 36 L9 41 Q10 44 14 44 L28 44 Q35 44 35 37 L35 31 L33 31"/>
           </svg>
           <span class="env-hint-text">Tap to open</span>
+        </div>
+      </div>
+
+      <!-- Stand-in sheet that flies from the envelope to the card position -->
+      <div class="letter-proxy" id="letter-proxy" aria-hidden="true">
+        <div class="env-letter-frame">
+          <span class="env-letter-mono" id="proxy-mono">Y&amp;H</span>
+          <span class="env-letter-rule"></span>
+          <span class="env-letter-names" id="proxy-names"></span>
+          <span class="env-letter-date" id="proxy-date"></span>
         </div>
       </div>
     </div>

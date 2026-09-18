@@ -32,7 +32,7 @@ window.WEDDING_CONFIG = {
   /* ---- INVITATION LINE ---------------------------------------------- */
   invite: {
     en: "Youssef Ashraf & Huda Hussain request the pleasure of your company at their wedding celebration",
-    ar: "يسر يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما"
+    ar: "بتشرف يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما"
   },
   
   /* ---- VENUE --------------------------------------------------------

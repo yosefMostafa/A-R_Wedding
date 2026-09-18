@@ -14,198 +14,365 @@
 }
 
 /* ================================================================
-   ENVELOPE OPENER
+   ENVELOPE OPENER — a 3D envelope with a real front (address side)
+   and back (flap + seal). Open sequence classes, set by envelope.js:
+     #scene.opening → .envelope.flipped → #scene.cracked → #scene.flap-open
+     → #scene.letter-out → .envelope.away → #scene.opened
    ================================================================ */
 
-/* ── Letter names/date overlaid on the flap's upper face ─────── */
-.env-letter-top {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 25%;
-  transform: translateY(-50%);
-  z-index: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-  padding: 0 24px;
-  transition: opacity 0.3s ease;
+/* Pointer-tilt angles transition smoothly (falls back to instant) */
+@property --tx { syntax: '<angle>'; inherits: true; initial-value: 0deg; }
+@property --ty { syntax: '<angle>'; inherits: true; initial-value: 0deg; }
+
+.envelope-stage {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 560px, calc((100svh - 230px) * 1.5));
+  aspect-ratio: 3 / 2;
+  transform-style: preserve-3d;
+  animation: env-sway 7s ease-in-out infinite;
+  transition: --tx 0.4s ease, --ty 0.4s ease;
 }
-.envelope-scene.opening .env-letter-top,
-.envelope-scene.opened  .env-letter-top { opacity: 0; }
-.env-letter-top .env-letter-names {
-  font-size: clamp(20px, 5.4vw, 28px);
-  color: var(--cream-light);
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
-}
-.env-letter-top .env-letter-date {
-  font-size: clamp(10px, 2.6vw, 12px);
-  color: rgba(255, 255, 255, 0.7);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
-}
+.envelope-scene.opening .envelope-stage { animation-play-state: paused; }
 
 .envelope {
-  /* Fills the whole viewport; the flap seam (and seal) sit at mid-height */
-  --env-flap-h: 50%;
-
   position: absolute;
   inset: 0;
-  z-index: 3;
-  width: 100%;
-  height: 100%;
   cursor: pointer;
-  perspective: 1400px;
-  perspective-origin: center top;
-  /* Delayed so the flap finishes opening before the envelope drifts away */
-  transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.85s,
-              opacity 0.6s ease 0.9s;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.4, 0.05, 0.2, 1), opacity 0.6s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-.envelope:focus-visible {
-  outline: 3px solid var(--gold-bright);
-  outline-offset: -6px;
+.envelope:focus-visible { outline: 3px solid var(--gold-bright); outline-offset: 12px; border-radius: 8px; }
+.envelope.flipped { transform: rotateY(180deg); }
+.envelope.flipped.away {
+  transform: rotateY(180deg) translateY(45vh) rotateX(25deg);
+  opacity: 0;
+  transition: transform 0.8s ease-in, opacity 0.6s ease-in 0.2s;
 }
-.envelope-scene.opening .envelope { transform: scale(0.97); opacity: 0; }
 
-/* ── Envelope body (rectangle, holds the letter) ─────────────── */
-.env-body {
+/* ── Faces ────────────────────────────────────────────────────── */
+.env-face {
   position: absolute;
   inset: 0;
-  background: linear-gradient(170deg, var(--env-1) 0%, var(--env-2) 48%, var(--env-3) 100%);
+  border-radius: 6px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
   box-shadow:
-    0 24px 60px -20px rgba(0, 0, 0, 0.65),
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-  z-index: 1;
+    0 34px 70px -24px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
 }
-.env-body::after {
+/* paper grain on every burgundy surface */
+.env-face::before,
+.env-fold::after,
+.env-flap-outer::after {
   content: "";
   position: absolute;
   inset: 0;
-  box-shadow: inset 0 10px 30px -10px rgba(0, 0, 0, 0.35);
+  border-radius: inherit;
+  background: var(--paper-grain) 0 0 / 160px 160px;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
   pointer-events: none;
-  z-index: 3;
 }
 
-/* Decorative inner V-fold flaps (envelope lining) */
-.env-flap-left,
-.env-flap-right {
+.env-front {
+  background: linear-gradient(160deg, var(--env-1) 0%, var(--env-2) 55%, var(--env-3) 100%);
+}
+.env-edge {
   position: absolute;
-  top: 0;
-  width: 50%;
-  height: 100%;
-  z-index: 1;
-}
-.env-flap-left {
-  left: 0;
-  background: linear-gradient(135deg, var(--env-1) 0%, transparent 60%);
-  clip-path: polygon(0 0, 0 100%, 50% 45%);
-}
-.env-flap-right {
-  right: 0;
-  background: linear-gradient(225deg, var(--env-1) 0%, transparent 60%);
-  clip-path: polygon(100% 0, 100% 100%, 50% 45%);
-}
-.env-flap-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60%;
-  background: linear-gradient(to top, var(--env-3) 0%, transparent 70%);
-  clip-path: polygon(0 100%, 50% 30%, 100% 100%);
-  z-index: 1;
+  inset: 10px;
+  border: 1px solid rgba(240, 217, 168, 0.35);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  pointer-events: none;
 }
 
+/* Address block (hand-lettered feel) */
+.env-address {
+  position: absolute;
+  left: 8%;
+  right: 34%;
+  top: 36%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  color: var(--cream-light);
+  text-align: left;
+}
+.env-address-ar {
+  font-family: var(--ar-display);
+  font-size: clamp(15px, 4vw, 24px);
+  color: var(--gold-bright);
+  direction: rtl;
+}
+.env-address-to {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(17px, 4.6vw, 28px);
+  line-height: 1.1;
+}
+.env-address-line {
+  width: 70%;
+  height: 1px;
+  margin: 4px 0 5px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.env-address-names {
+  font-family: var(--serif);
+  font-size: clamp(13px, 3.4vw, 19px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+.env-address-date {
+  font-family: var(--kufi);
+  font-size: clamp(8px, 2.2vw, 11px);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(253, 250, 243, 0.7);
+}
+
+/* Gold stamp with perforated edge */
+.env-stamp {
+  position: absolute;
+  top: 7%;
+  right: 6%;
+  width: clamp(50px, 15%, 84px);
+  aspect-ratio: 4 / 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 2px;
+  background: linear-gradient(160deg, var(--gold-light), var(--gold) 55%, var(--clay));
+  outline: 2px dashed var(--cream-light);
+  outline-offset: -4px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+  transform: rotate(3deg);
+}
+.env-stamp-mono {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(15px, 4vw, 24px);
+  color: var(--ink);
+}
+.env-stamp-year {
+  font-family: var(--kufi);
+  font-size: clamp(7px, 1.8vw, 9px);
+  letter-spacing: 0.2em;
+  color: var(--ink);
+}
+
+/* Postmark: double ring + cancellation lines, overlapping the stamp */
+.env-postmark {
+  position: absolute;
+  top: 20%;
+  right: 17%;
+  width: clamp(62px, 19%, 104px);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 50%;
+  border: 2px solid rgba(240, 217, 168, 0.7);
+  box-shadow: inset 0 0 0 4px transparent, inset 0 0 0 5px rgba(240, 217, 168, 0.5);
+  color: rgba(240, 217, 168, 0.85);
+  transform: rotate(-12deg);
+  mix-blend-mode: screen;
+}
+.env-postmark::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 32%;
+  width: 55%;
+  height: 36%;
+  background: repeating-linear-gradient(180deg, currentColor 0 1.5px, transparent 1.5px 8px);
+  opacity: 0.6;
+}
+.env-postmark-date { font-family: var(--kufi); font-size: clamp(8px, 2vw, 11px); letter-spacing: 0.12em; }
+.env-postmark-place { font-family: var(--kufi); font-size: clamp(6px, 1.5vw, 8px); letter-spacing: 0.2em; }
+
+/* ── Back face: lining, letter, pocket, flap, seal ────────────── */
+.env-back {
+  transform: rotateY(180deg);
+  background: var(--env-lining);
+}
+.env-inside {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--lining-pattern) center / 96px 96px, var(--env-lining);
+}
+.env-inside::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 30%, rgba(46, 8, 17, 0.35), rgba(46, 8, 17, 0.75));
+}
+
+/* The letter inside the pocket */
+.env-letter {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 12%;
+  height: 92%;
+  z-index: 1;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--cream-light), var(--cream-card));
+  box-shadow: 0 -6px 18px -10px rgba(0, 0, 0, 0.6);
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.envelope-scene.letter-out .env-letter { transform: translateY(-62%); }
+
+.env-letter-frame {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(184, 134, 60, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding-top: 8%;
+  text-align: center;
+}
+.env-letter-mono {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(22px, 5.4vw, 34px);
+  line-height: 1.1;
+  color: var(--ink);
+}
+.env-letter-rule { width: 54px; height: 1px; background: var(--gold); }
 .env-letter-names {
   font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(14px, 3.8vw, 20px);
-  letter-spacing: 0.08em;
-  color: var(--ink);
+  font-size: clamp(12px, 3vw, 16px);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--ink-soft);
 }
 .env-letter-date {
   font-family: var(--kufi);
-  font-size: clamp(9px, 2.4vw, 11px);
-  letter-spacing: 0.3em;
+  font-size: clamp(8px, 2vw, 10px);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
 
-/* ── Top flap (triangle, hinges open) ────────────────────────── */
-.env-flap-top {
+/* Pocket folds: two side triangles + bottom triangle, embossed edges */
+.env-pocket {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--env-flap-h);
-  clip-path: polygon(0 0, 50% 100%, 100% 0);
-  background: linear-gradient(170deg, var(--env-1) 0%, var(--env-2) 100%);
-  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
-  z-index: 4;
-  transform-origin: top center;
-  transform: rotateX(0deg);
-  backface-visibility: hidden;
-  transition: transform 0.85s cubic-bezier(0.34, 0.01, 0.2, 1);
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateZ(1px);
 }
-.envelope-scene.opening .env-flap-top {
-  transform: rotateX(-172deg);
+.env-fold { position: absolute; inset: 0; }
+.env-fold-left {
+  clip-path: polygon(0 0, 50% 52%, 0 100%);
+  background: linear-gradient(100deg, var(--env-1) 0%, var(--env-2) 70%);
+}
+.env-fold-right {
+  clip-path: polygon(100% 0, 50% 52%, 100% 100%);
+  background: linear-gradient(260deg, var(--env-1) 0%, var(--env-2) 70%);
+}
+.env-fold-bottom {
+  clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+  background: linear-gradient(0deg, var(--env-3) 0%, var(--env-2) 55%, var(--env-1) 100%);
+  filter: drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.12)) drop-shadow(0 -3px 5px rgba(0, 0, 0, 0.45));
 }
 
-/* ── Wax seal — sits at the flap/body seam, sibling of both so the
-   flap's triangular clip-path never clips it ────────────────────── */
+/* Top flap: hinges from the top edge; inner side shows the lining */
+.env-flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 52%;
+  z-index: 3;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transform: translateZ(2px);
+  transition: transform 0.9s cubic-bezier(0.34, 0.01, 0.2, 1);
+}
+.envelope-scene.flap-open .env-flap { transform: translateZ(2px) rotateX(-168deg); }
+.env-flap-outer,
+.env-flap-inner {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.env-flap-outer {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 12%),
+    linear-gradient(185deg, var(--env-1) 0%, var(--env-2) 62%, var(--env-3) 100%);
+}
+.env-flap-inner {
+  transform: rotateX(180deg);
+  background:
+    linear-gradient(0deg, rgba(46, 8, 17, 0.7), rgba(46, 8, 17, 0.35)),
+    var(--lining-pattern) center / 96px 96px,
+    var(--env-lining);
+}
+
+/* Wax seal: two clipped halves that split apart when tapped */
 .env-seal {
   position: absolute;
-  top: var(--env-flap-h);
+  top: 52%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(64px, 18vw, 96px);
-  height: clamp(64px, 18vw, 96px);
+  z-index: 4;
+  width: clamp(64px, 17%, 96px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) translateZ(3px);
+  animation: seal-pulse 3.6s ease-in-out infinite;
+}
+.envelope-scene.opening .env-seal { animation: none; }
+.env-seal-half {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
   background: radial-gradient(circle at 38% 35%, var(--env-1) 0%, var(--ink) 60%, var(--env-3) 100%);
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.5),
+    0 6px 16px rgba(0, 0, 0, 0.5),
     inset 0 2px 4px rgba(255, 255, 255, 0.15),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-  animation: seal-pulse 3.6s ease-in-out infinite;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+    inset 0 -2px 6px rgba(0, 0, 0, 0.4),
+    0 0 0 3px rgba(240, 217, 168, 0.25);
+  transition: transform 0.5s ease-in, opacity 0.5s ease-in;
 }
-.env-seal::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 2px dashed rgba(240, 217, 168, 0.25);
-  pointer-events: none;
-}
+.env-seal-left  { clip-path: polygon(0 0, 52% 0, 46% 18%, 55% 34%, 47% 50%, 54% 66%, 45% 84%, 51% 100%, 0 100%); }
+.env-seal-right { clip-path: polygon(52% 0, 100% 0, 100% 100%, 51% 100%, 45% 84%, 54% 66%, 47% 50%, 55% 34%, 46% 18%); }
+.envelope-scene.cracked .env-seal-left  { transform: translate(-22px, 14px) rotate(-18deg); opacity: 0; }
+.envelope-scene.cracked .env-seal-right { transform: translate(22px, 18px) rotate(15deg);  opacity: 0; }
 .env-seal-text {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(18px, 5vw, 26px);
-  color: var(--gold-bright);
+  font-style: italic;
+  font-size: clamp(18px, 4.6vw, 26px);
   letter-spacing: 0.05em;
+  color: var(--gold-bright);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
-.envelope-scene.opening .env-seal,
-.envelope-scene.opened  .env-seal {
-  animation: none;
-}
-.envelope-scene.opening .env-seal {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(1.3);
-}
 
-/* ── Tap hint just below the seal ────────────────────────────── */
+/* ── Tap hint under the envelope ─────────────────────────────── */
 .env-hint {
   position: absolute;
-  top: calc(var(--env-flap-h) + clamp(64px, 14vw, 84px));
+  top: calc(100% + 36px);
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
@@ -230,12 +397,28 @@
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
-  text-align: center;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-.envelope-scene.opening .env-hint,
-.envelope-scene.opened  .env-hint { opacity: 0; }
+.envelope-scene.opening .env-hint { opacity: 0; }
+
+/* ── Letter proxy: flies from the envelope to the card's spot ─── */
+.letter-proxy {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  display: none;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--cream-light), var(--cream-card));
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.55);
+  will-change: transform, width, height;
+  transition:
+    transform 0.8s var(--ease-out-expo),
+    width 0.8s var(--ease-out-expo),
+    height 0.8s var(--ease-out-expo);
+}
+.letter-proxy.on { display: block; }
 
 /* ================================================================
    INVITATION CARD

@@ -8,13 +8,15 @@
   50%       { transform: translateX(-50%) translateY(5px); }
 }
 
-/* ── Letter card entrance: the sheet rises, then each block inks in
-   top-to-bottom (stagger via --i, set in envelope.js) and the
-   ornament rules draw themselves ────────────────────────────────── */
-@keyframes letter-rise {
-  from { opacity: 0; transform: translateY(40px); }
-  to   { opacity: 1; transform: none; }
+/* ── Envelope idle: slow 3D wobble on the stage (tilt vars come from
+   the pointer on desktop, see envelope.js) ─────────────────────── */
+@keyframes env-sway {
+  0%, 100% { transform: rotateX(calc(var(--tx, 0deg) + 6deg))  rotateY(calc(var(--ty, 0deg) - 4deg)) translateY(0); }
+  50%       { transform: rotateX(calc(var(--tx, 0deg) + 3deg))  rotateY(calc(var(--ty, 0deg) + 4deg)) translateY(-8px); }
 }
+
+/* ── Letter card: each block inks in top-to-bottom (stagger via --i,
+   set in envelope.js) and the ornament rules draw themselves ────── */
 @keyframes ink-in {
   from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
   to   { opacity: 1; transform: none;             filter: blur(0); }
@@ -26,8 +28,8 @@
 
 /* ── Wax seal idle breathing pulse ─────────────────────────────── */
 @keyframes seal-pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50%       { transform: translate(-50%, -50%) scale(1.05); }
+  0%, 100% { transform: translate(-50%, -50%) translateZ(3px) scale(1); }
+  50%       { transform: translate(-50%, -50%) translateZ(3px) scale(1.05); }
 }
 
 /* ── Music note bob (playing state) ──────────────────────────── */

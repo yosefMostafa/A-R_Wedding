@@ -44,9 +44,24 @@
   var groomEn = (C.groom && C.groom.en) || '';
   var brideEn = (C.bride && C.bride.en) || '';
   var initials = (groomEn.trim().charAt(0) || 'Y').toUpperCase() + '&' + (brideEn.trim().charAt(0) || 'H').toUpperCase();
-  set('env-monogram', C.monogram || initials);
-  set('env-names', groomEn + ' & ' + brideEn);
-  if (C.date && C.date.en) set('env-date', C.date.en.toUpperCase());
+  var monogram = C.monogram || initials;
+  var names    = groomEn + ' & ' + brideEn;
+  var dateEn   = (C.date && C.date.en) ? C.date.en.toUpperCase() : '';
+
+  /* seal halves, stamp, letter and its flying proxy all carry the same text */
+  document.querySelectorAll('.env-seal-text').forEach(function (el) { el.textContent = monogram; });
+  ['env-stamp-mono', 'env-letter-mono', 'proxy-mono'].forEach(function (id) { set(id, monogram); });
+  ['env-names', 'env-letter-names', 'proxy-names'].forEach(function (id) { set(id, names); });
+  ['env-date', 'env-letter-date', 'proxy-date'].forEach(function (id) { set(id, dateEn); });
+
+  /* postmark: dd · mm · yyyy from dateISO, place from the venue */
+  var when = C.dateISO ? new Date(C.dateISO) : null;
+  if (when && !isNaN(when)) {
+    var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+    set('env-postmark-date', pad2(when.getDate()) + ' · ' + pad2(when.getMonth() + 1) + ' · ' + when.getFullYear());
+    set('env-stamp-year', String(when.getFullYear()));
+  }
+  set('env-postmark-place', ((C.venue && C.venue.address && C.venue.address.en) || '').toUpperCase());
 
   /* ── Document title ──────────────────────────────────────────── */
   document.title = groomEn + ' & ' + brideEn + ' — Wedding Invitation';
