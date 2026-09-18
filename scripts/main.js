@@ -40,12 +40,13 @@
   set('bride-ar', C.bride && C.bride.ar);
   set('bride-en', C.bride && C.bride.en);
 
-  /* ── Court scene — initials + date chip ──────────────────────── */
+  /* ── Envelope scene — monogram + couple names + date ─────────── */
   var groomEn = (C.groom && C.groom.en) || '';
   var brideEn = (C.bride && C.bride.en) || '';
-  set('court-groom-i', groomEn.trim().charAt(0).toUpperCase() || 'A');
-  set('court-bride-i', brideEn.trim().charAt(0).toUpperCase() || 'R');
-  if (C.date && C.date.en) set('court-date', C.date.en.toUpperCase());
+  var initials = (groomEn.trim().charAt(0) || 'Y').toUpperCase() + '&' + (brideEn.trim().charAt(0) || 'H').toUpperCase();
+  set('env-monogram', C.monogram || initials);
+  set('env-names', groomEn + ' & ' + brideEn);
+  if (C.date && C.date.en) set('env-date', C.date.en.toUpperCase());
 
   /* ── Document title ──────────────────────────────────────────── */
   document.title = groomEn + ' & ' + brideEn + ' — Wedding Invitation';
@@ -157,81 +158,49 @@
     }
   })();
 
-  /* ── Scroll-reveal + auto-scroll ────────────────────────────── */
-  window.initScrollReveal = function () {
-    /* IntersectionObserver: animate each section as it enters view */
-    var io = new IntersectionObserver(function (entries) {
-      var batch = 0;
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var el = entry.target;
-          el.style.transitionDelay = (batch * 0.45) + 's';
-          el.classList.add('in-view');
-          io.unobserve(el);
-          batch++;
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -16px 0px' });
-
-    document.querySelectorAll('#invitation .reveal').forEach(function (el) {
-      io.observe(el);
-    });
-
-    /* Auto-scroll: slow cinematic drift down; stops on any interaction */
-    var rafId = null;
-    var stopped = false;
-
-    function stop() {
-      if (stopped) return;
-      stopped = true;
-      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-      window.removeEventListener('wheel',       stop);
-      window.removeEventListener('touchstart',  stop);
-      window.removeEventListener('pointerdown', stop);
-      window.removeEventListener('keydown',     stop);
-    }
-
-    var startTs = null;
-    var startY  = 0;
-    var SPEED   = 30; /* px/sec — tune here */
-    function tick(ts) {
-      if (stopped) return;
-      if (startTs === null) { startTs = ts; startY = window.pageYOffset; }
-      var targetY = startY + SPEED * (ts - startTs) / 1000;
-      var maxY    = document.documentElement.scrollHeight - window.innerHeight;
-      if (targetY >= maxY) { window.scrollTo(0, maxY); stop(); return; }
-      window.scrollTo(0, targetY);   /* float position — no accumulator, no stutter */
-      rafId = requestAnimationFrame(tick);
-    }
-
-    /* Give the first section time to fully animate in before drifting */
-    var startTimer = setTimeout(function () {
-      if (stopped) return;
-      window.addEventListener('wheel',       stop, { passive: true });
-      window.addEventListener('touchstart',  stop, { passive: true });
-      window.addEventListener('pointerdown', stop, { passive: true });
-      window.addEventListener('keydown',     stop);
-      rafId = requestAnimationFrame(tick);
-    }, 1800);
-
-    /* If user touches before the timer fires, cancel it too */
-    function earlyStop() {
-      clearTimeout(startTimer);
-      stop();
-      window.removeEventListener('wheel',       earlyStop);
-      window.removeEventListener('touchstart',  earlyStop);
-      window.removeEventListener('pointerdown', earlyStop);
-      window.removeEventListener('keydown',     earlyStop);
-    }
-    window.addEventListener('wheel',       earlyStop, { passive: true });
-    window.addEventListener('touchstart',  earlyStop, { passive: true });
-    window.addEventListener('pointerdown', earlyStop, { passive: true });
-    window.addEventListener('keydown',     earlyStop);
+  /* ── Toast ───────────────────────────────────────────────────── */
+  var toastTimer = null;
+  window._toast = function (msg) {
+    var t = $('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2600);
   };
+
+  /* ── Share ───────────────────────────────────────────────────── */
+  (function () {
+    var btn = $('share-btn');
+    if (!btn) return;
+
+    var shareTitle = groomEn + ' & ' + brideEn + ' — Wedding Invitation';
+    var shareText  = shareTitle
+      + ((C.date && C.date.en) ? ' · ' + C.date.en : '');
+
+    btn.addEventListener('click', function () {
+      var url = C.siteUrl || window.location.href;
+
+      if (navigator.share) {
+        navigator.share({ title: shareTitle, text: shareText, url: url })
+          .catch(function () { /* user dismissed the share sheet */ });
+        return;
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url)
+          .then(function () { window._toast('Invitation link copied'); })
+          .catch(function () { window._toast(url); });
+        return;
+      }
+      window._toast(url);
+    });
+  })();
 
   /* ── Init modules ────────────────────────────────────────────── */
   initCountdown(C);
   initPetals(C);
   initMusic(C);
+  initCalendar(C);
+  initScroll();
   initEnvelope();
 }());

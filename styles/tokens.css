@@ -9,43 +9,48 @@
 
 :root {
   /* ── Cream palette ───────────────────────────────────────────── */
-  --cream:        #f1e7d3;
-  --cream-deep:   #e2d4b9;
-  --cream-light:  #f6efdd;
-  --cream-card:   #ebdfc5;
+  --cream:        #F8F3EA;
+  --cream-deep:   #EFE2D6;
+  --cream-light:  #FDFAF3;
+  --cream-card:   #F4ECE0;
 
-  /* ── Gold / clay scale ───────────────────────────────────────── */
-  --gold:         #6e5232;
-  --gold-light:   #9c7748;
-  --gold-bright:  #c6a06a;
-  --clay:         #6e5232;
+  /* ── Burgundy & gold scale ───────────────────────────────────── */
+  --gold:         #B8863C;
+  --gold-light:   #D9AE6C;
+  --gold-bright:  #F0D9A8;
+  --clay:         #7D5411;
 
-  /* ── Ink (text) ──────────────────────────────────────────────── */
-  --ink:          #161616;
-  --ink-soft:     #3c3a36;
-  --ink-muted:    #6b635a;
+  /* ── Ink (text) — deep burgundy heading ink ─────────────────── */
+  --ink:          #5E1327;
+  --ink-soft:     #4A3F39;
+  --ink-muted:    #8A6A46;
 
-  /* ── Court scene background ──────────────────────────────────── */
-  --court-bg:     #173a20;
+  /* ── Envelope scene background ─────────────────────────────────── */
+  --court-bg:     #17070C;
 
-  /* ── Gold gradient (dark metallic foil — for text & headings) ── */
+  /* ── Envelope shell — layered burgundy shades (flap/body/seal) ── */
+  --env-1:        #7A1B32;
+  --env-2:        #5A1123;
+  --env-3:        #3A0A17;
+
+  /* ── Gold gradient (metallic foil — for text & headings) ───────── */
   --gold-gradient: linear-gradient(
     135deg,
-    #141414 0%,
-    #2c2c2c 32%,
-    #0f0f0f 54%,
-    #2c2c2c 74%,
-    #141414 100%
+    #7D5411 0%,
+    #F0D9A8 32%,
+    #B8863C 54%,
+    #F0D9A8 74%,
+    #7D5411 100%
   );
 
-  /* ── Clay gradient (warm earthy — decorative elements) ──────── */
+  /* ── Clay gradient (bronze — decorative elements) ────────────────── */
   --clay-gradient: linear-gradient(
     135deg,
-    #4a3720 0%,
-    #9a7445 32%,
-    #6e5232 54%,
-    #bb9263 74%,
-    #41301a 100%
+    #7D5411 0%,
+    #F0D9A8 32%,
+    #7D5411 54%,
+    #B8863C 74%,
+    #7D5411 100%
   );
 
   /* ── Font stacks ─────────────────────────────────────────────── */
@@ -64,13 +69,16 @@
 @media (prefers-reduced-motion: reduce) {
   .petal,
   .music-btn .disc,
-  .tennis-card,
-  .ball-wrap,
-  .envelope-scene::after {
+  .envelope,
+  .env-flap-top,
+  .env-seal,
+  .env-hint {
     animation: none !important;
   }
-  .reveal {
-    transition: none !important;
+  #invitation-card,
+  #invitation-card .inner > *,
+  #invitation-card .orn svg {
+    animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
