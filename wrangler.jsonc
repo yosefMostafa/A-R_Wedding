@@ -1,0 +1,10 @@
+{
+  "name": "y-h-wedding",
+  "compatibility_date": "2026-06-19",
+  "assets": {
+    "directory": "."
+  },
+  "observability": {
+    "enabled": true
+  }
+}
