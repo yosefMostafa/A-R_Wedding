@@ -2,7 +2,8 @@
   "name": "y-h-wedding",
   "compatibility_date": "2026-06-19",
   "assets": {
-    "directory": "."
+    "directory": "out",
+    "not_found_handling": "404-page"
   },
   "observability": {
     "enabled": true
