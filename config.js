@@ -27,12 +27,12 @@ window.WEDDING_CONFIG = {
      Leave as "" and the event defaults to 4 hours long. */
   endISO:  "2026-10-05T00:00:00",
   date:    { en: "Sunday, 4 Oct 2026",  ar: "الأحد ٤ أكتوبر ٢٠٢٦" },
-  time:    { en: "8:00 - 12:00 in the evening",   ar: "الثامن حتى الثاني عشر مساءً" },
+  time:    { en: "8:00 - 12:00 in the evening",   ar: "الثامنة حتى الثانية عشر مساءً" },
 
   /* ---- INVITATION LINE ---------------------------------------------- */
   invite: {
-    en: "Youssef Ashraf & Huda Hussain request the pleasure of your company at their wedding celebration",
-    ar: "بتشرف يوسف أشرف وهدى حسين دعوتكم لحضور حفل زفافهما"
+    en: "We are honored to invite you to the wedding of Youssef Ashraf & Huda Hussein",
+    ar: "نتشرف بدعوة سيادتكم لحضور حفل زفاف يوسف أشرف وهدى حسين"
   },
   
   /* ---- VENUE --------------------------------------------------------
