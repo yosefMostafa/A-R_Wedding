@@ -2,7 +2,7 @@
    LAYOUT — structural positioning and section structure
    ================================================================ */
 
-/* ── Islamic geometric lattice background (full-page fixed) ───── */
+/* ── Geometric lattice background (full-page fixed) ──────────── */
 .bg-pattern {
   position: fixed;
   inset: 0;
@@ -11,9 +11,9 @@
   opacity: 0.5;
   background-color: var(--cream);
   background-image:
-    radial-gradient(circle at center, rgba(184, 134, 60,.10) 0 1.2px, transparent 1.6px),
-    repeating-linear-gradient(45deg,  rgba(184, 134, 60,.045) 0 1px, transparent 1px 28px),
-    repeating-linear-gradient(-45deg, rgba(184, 134, 60,.045) 0 1px, transparent 1px 28px),
+    radial-gradient(circle at center, rgba(139, 92, 58, .10) 0 1.2px, transparent 1.6px),
+    repeating-linear-gradient(45deg,  rgba(139, 92, 58, .045) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(-45deg, rgba(139, 92, 58, .045) 0 1px, transparent 1px 28px),
     radial-gradient(circle at center, var(--cream) 0%, var(--cream-deep) 140%);
   background-size: 28px 28px, 28px 28px, 28px 28px, 100% 100%;
 }
@@ -27,8 +27,8 @@
   overflow: hidden;
 }
 
-/* ── Envelope opener scene ────────────────────────────────────── */
-.envelope-scene {
+/* ── Gate opener scene ───────────────────────────────────────── */
+.gate-scene {
   position: fixed;
   inset: 0;
   z-index: 100;
@@ -36,38 +36,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--court-bg);
+  background: var(--gate-bg);
   overflow: hidden;
-  perspective: 1600px;
-  perspective-origin: 50% 40%;
-  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+  perspective: 1200px;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
-/* Warm vignette behind the envelope for depth */
-.envelope-scene::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    120% 80% at 50% 8%,
-    rgba(94, 19, 39, 0.55),
-    transparent 55%
-  ), radial-gradient(
-    circle at center,
-    transparent 40%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
-}
-
-.envelope-scene.opened {
+.gate-scene.opened {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
 /* ── Main invitation page ─────────────────────────────────────── */
+/* ponytail: vignette pseudo creates "light from edges" during zoom reveal */
 .invitation {
   position: relative;
   z-index: 1;
@@ -80,17 +62,33 @@
   gap: clamp(18px, 3.4vh, 30px);
   padding: clamp(36px, 7vh, 64px) clamp(16px, 4vw, 48px) clamp(56px, 10vh, 96px);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: scale(0.25);
+  filter: brightness(0.55);
+  transition: opacity 0.4s ease,
+              transform 1.6s var(--ease-out-expo),
+              filter 1.6s ease;
 }
-.invitation.show { opacity: 1; }
+.invitation.show { opacity: 1; transform: scale(1); filter: brightness(1); }
 
-/* ── Letter card entrance — the letter proxy flies into this exact spot
-   (see envelope.js), then the blocks ink in with a stagger ─────────── */
-.letter-perspective {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.invitation::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+    rgba(139, 92, 58, 0.55) 0%,
+    rgba(139, 92, 58, 0.32) 35%,
+    rgba(139, 92, 58, 0.08) 72%,
+    transparent 100%);
+  opacity: 0;
+  will-change: opacity;
 }
+.invitation.show::before {
+  animation: edge-light 1.8s ease-out forwards;
+}
+
+/* ── Card entrance — ink-in stagger ───────────────────────────── */
 #invitation-card,
 #invitation-card .inner > * { opacity: 0; }
 #invitation-card.unfolded { opacity: 1; }
@@ -127,12 +125,12 @@
   font-family: var(--kufi);
   font-size: clamp(12px, 2.6vw, 14px);
   letter-spacing: 0.12em;
-  color: var(--ink);
+  color: var(--text-footer);
   text-align: center;
   opacity: 0.72;
 }
 .dev-footer a {
-  color: var(--ink);
+  color: var(--text-footer);
   text-decoration: none;
   display: inline-flex;
   align-items: center;

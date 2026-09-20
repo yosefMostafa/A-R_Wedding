@@ -1,6 +1,6 @@
 /**
  * main.js — boots the invitation from window.WEDDING_CONFIG.
- * Reads config.js, hydrates the DOM, wires court scene + music + countdown + petals.
+ * Reads config.js, hydrates the DOM, wires gate + music + countdown + petals.
  */
 
 (function () {
@@ -14,6 +14,9 @@
       creamDeep:    '--cream-deep',
       creamLight:   '--cream-light',
       creamCard:    '--cream-card',
+      primary:      '--primary',
+      primaryLight: '--primary-light',
+      primaryDeep:  '--primary-deep',
       gold:         '--gold',
       goldLight:    '--gold-light',
       goldBright:   '--gold-bright',
@@ -21,12 +24,32 @@
       ink:          '--ink',
       inkSoft:      '--ink-soft',
       inkMuted:     '--ink-muted',
-      courtBg:      '--court-bg',
+      gateBg:       '--gate-bg',
+      gateDoor:     '--gate-door',
+      gateDoorDark: '--gate-door-dark',
+      gateTrim:     '--gate-trim',
+      textEyebrow:      '--text-eyebrow',
+      textNameAr:       '--text-name-ar',
+      textNameEn:       '--text-name-en',
+      textAmp:          '--text-amp',
+      textInviteLine:   '--text-invite-line',
+      textDateMain:     '--text-date-main',
+      textDateTime:     '--text-date-time',
+      textVenueName:    '--text-venue-name',
+      textVenueAddr:    '--text-venue-addr',
+      textCountdownNum: '--text-cd-num',
+      textCountdownLbl: '--text-cd-lbl',
+      textVerseAr:      '--text-verse-ar',
+      textVerseEn:      '--text-verse-en',
+      textVerseRef:     '--text-verse-ref',
+      textSectionLabel: '--text-section-label',
+      textFooter:       '--text-footer',
+      textGateHint:     '--text-gate-hint',
       goldGradient: '--gold-gradient',
       clayGradient: '--clay-gradient'
     };
     Object.keys(C.theme).forEach(function (k) {
-      if (map[k]) r.setProperty(map[k], C.theme[k]);
+      if (map[k] && C.theme[k]) r.setProperty(map[k], C.theme[k]);
     });
   }
 
@@ -40,28 +63,12 @@
   set('bride-ar', C.bride && C.bride.ar);
   set('bride-en', C.bride && C.bride.en);
 
-  /* ── Envelope scene — monogram + couple names + date ─────────── */
+  /* ── Gate monogram ──────────────────────────────────────────── */
   var groomEn = (C.groom && C.groom.en) || '';
   var brideEn = (C.bride && C.bride.en) || '';
   var initials = (groomEn.trim().charAt(0) || 'Y').toUpperCase() + '&' + (brideEn.trim().charAt(0) || 'H').toUpperCase();
   var monogram = C.monogram || initials;
-  var names    = groomEn + ' & ' + brideEn;
-  var dateEn   = (C.date && C.date.en) ? C.date.en.toUpperCase() : '';
-
-  /* seal halves, stamp, letter and its flying proxy all carry the same text */
-  document.querySelectorAll('.env-seal-text').forEach(function (el) { el.textContent = monogram; });
-  ['env-stamp-mono', 'env-letter-mono', 'proxy-mono'].forEach(function (id) { set(id, monogram); });
-  ['env-names', 'env-letter-names', 'proxy-names'].forEach(function (id) { set(id, names); });
-  ['env-date', 'env-letter-date', 'proxy-date'].forEach(function (id) { set(id, dateEn); });
-
-  /* postmark: dd · mm · yyyy from dateISO, place from the venue */
-  var when = C.dateISO ? new Date(C.dateISO) : null;
-  if (when && !isNaN(when)) {
-    var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
-    set('env-postmark-date', pad2(when.getDate()) + ' · ' + pad2(when.getMonth() + 1) + ' · ' + when.getFullYear());
-    set('env-stamp-year', String(when.getFullYear()));
-  }
-  set('env-postmark-place', ((C.venue && C.venue.address && C.venue.address.en) || '').toUpperCase());
+  set('gate-monogram', monogram);
 
   /* ── Document title ──────────────────────────────────────────── */
   document.title = groomEn + ' & ' + brideEn + ' — Wedding Invitation';
@@ -124,14 +131,12 @@
       if (el) el.setAttribute('content', val);
     }
 
-    /* Bilingual title: Arabic | English */
     var groomAr  = (C.groom && C.groom.ar) || '';
     var brideAr  = (C.bride && C.bride.ar) || '';
     var titleAr  = groomAr + ' و' + brideAr + ' — دعوة زفاف';
     var titleEn  = groomEn + ' & ' + brideEn + ' — Wedding Invitation';
     var title    = titleAr + ' | ' + titleEn;
 
-    /* Bilingual description: Arabic line then English line */
     var dateAr = (C.date && C.date.ar) || '';
     var timeAr = (C.time && C.time.ar) || '';
     var dateEn = (C.date && C.date.en) || '';
@@ -147,18 +152,15 @@
       + (timeEn ? ' · ' + timeEn : '');
     var desc = descAr + '\n' + descEn;
 
-    /* Update all title/description meta tags and the page title */
     document.title = title;
     setMeta('og-title', title);
     setMeta('og-desc',  desc);
     setMeta('tw-title', title);
     setMeta('tw-desc',  desc);
 
-    /* Also sync the plain <meta name="description"> */
     var plainDesc = document.querySelector('meta[name="description"]');
     if (plainDesc) plainDesc.setAttribute('content', desc);
 
-    /* Inject absolute URL only when siteUrl is configured */
     if (base) {
       setMeta('og-image',  imgPath);
       setMeta('tw-image',  imgPath);
@@ -198,7 +200,7 @@
 
       if (navigator.share) {
         navigator.share({ title: shareTitle, text: shareText, url: url })
-          .catch(function () { /* user dismissed the share sheet */ });
+          .catch(function () {});
         return;
       }
       if (navigator.clipboard) {
@@ -217,5 +219,5 @@
   initMusic(C);
   initCalendar(C);
   initScroll();
-  initEnvelope();
+  initGate();
 }());

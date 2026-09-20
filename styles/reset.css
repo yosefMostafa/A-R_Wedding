@@ -23,6 +23,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Locked by gate.js while the gate is closed; released once it opens */
+body.gate-locked {
+  overflow: hidden;
+  height: 100vh;
+}
+
 img, svg, canvas { display: block; max-width: 100%; }
 
 a { color: inherit; }

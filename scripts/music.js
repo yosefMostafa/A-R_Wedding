@@ -16,7 +16,10 @@ function initMusic(config) {
   function playMusic() {
     if (!config.musicUrl) return;
     audio.play()
-      .then(function () { mbtn.classList.add('playing'); })
+      .then(function () {
+        mbtn.classList.add('playing');
+        mbtn.setAttribute('aria-pressed', 'true');
+      })
       .catch(function () { /* autoplay blocked — user must click */ });
   }
 
@@ -34,9 +37,10 @@ function initMusic(config) {
     } else {
       audio.pause();
       mbtn.classList.remove('playing');
+      mbtn.setAttribute('aria-pressed', 'false');
     }
   });
 
-  /* Expose playMusic so the envelope can trigger it after opening */
+  /* Expose playMusic so the gate can trigger it after opening */
   window._playWeddingMusic = playMusic;
 }

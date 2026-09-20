@@ -2,21 +2,20 @@
    ANIMATIONS — all @keyframes live here
    ================================================================ */
 
-/* ── Tap-here hint float (for absolutely-centered elements) ───── */
+/* ── Tap-here hint float ─────────────────────────────────────── */
 @keyframes tap-hint-float {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50%       { transform: translateX(-50%) translateY(5px); }
 }
 
-/* ── Envelope idle: slow 3D wobble on the stage (tilt vars come from
-   the pointer on desktop, see envelope.js) ─────────────────────── */
-@keyframes env-sway {
-  0%, 100% { transform: rotateX(calc(var(--tx, 0deg) + 6deg))  rotateY(calc(var(--ty, 0deg) - 4deg)) translateY(0); }
-  50%       { transform: rotateX(calc(var(--tx, 0deg) + 3deg))  rotateY(calc(var(--ty, 0deg) + 4deg)) translateY(-8px); }
+/* ── Gate welcome heading fade-in ─────────────────────────────── */
+@keyframes gate-welcome-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* ── Letter card: each block inks in top-to-bottom (stagger via --i,
-   set in envelope.js) and the ornament rules draw themselves ────── */
+/* ── Card content: each block inks in top-to-bottom (stagger via
+   --i, set in gate.js) and the ornament rules draw themselves ── */
 @keyframes ink-in {
   from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
   to   { opacity: 1; transform: none;             filter: blur(0); }
@@ -26,23 +25,37 @@
   to   { transform: scaleX(1); }
 }
 
-/* ── Wax seal idle breathing pulse ─────────────────────────────── */
-@keyframes seal-pulse {
-  0%, 100% { transform: translate(-50%, -50%) translateZ(3px) scale(1); }
-  50%       { transform: translate(-50%, -50%) translateZ(3px) scale(1.05); }
+/* ── Equalizer bounce (music playing state) ───────────────────── */
+@keyframes eq-bounce {
+  0%, 100% { height: 6px; }
+  50%      { height: 17px; }
 }
 
-/* ── Music note bob (playing state) ──────────────────────────── */
-@keyframes note-bob {
-  from { transform: translateY(0) scale(1); }
-  to   { transform: translateY(-4px) scale(1.08); }
+/* ── Golden flash pulse (gate open) ──────────────────────────── */
+@keyframes gate-flash-pulse {
+  0%   { opacity: 0; }
+  35%  { opacity: 0.9; }
+  60%  { opacity: 0.45; }
+  100% { opacity: 0; }
 }
 
-/* ── Gold petal fall ──────────────────────────────────────────── */
+/* ── Sparkle burst (gate open) ───────────────────────────────── */
+@keyframes sparkle-burst {
+  0%   { opacity: 0; transform: scale(0) translate(0, 0); }
+  20%  { opacity: 1; transform: scale(1.2) translate(var(--dx, 0), var(--dy, 0)); }
+  100% { opacity: 0; transform: scale(0.3) translate(calc(var(--dx, 0) * 2.5), calc(var(--dy, 0) * 2.5 - 30px)); }
+}
+
+/* ── Edge-light reveal (vignette that fades → light from edges) ── */
+@keyframes edge-light {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ── Petal fall ──────────────────────────────────────────────── */
 @keyframes petal-fall {
   0%   { opacity: 0;   transform: translateY(-10vh) translateX(0)            rotate(0deg); }
   10%  { opacity: 0.8; }
   90%  { opacity: 0.7; }
   100% { opacity: 0;   transform: translateY(110vh) translateX(var(--drift)) rotate(540deg); }
 }
-

@@ -9,54 +9,74 @@
 
 :root {
   /* ── Cream palette ───────────────────────────────────────────── */
-  --cream:        #F8F3EA;
-  --cream-deep:   #EFE2D6;
-  --cream-light:  #FDFAF3;
-  --cream-card:   #F4ECE0;
+  --cream:        #E1DED4;
+  --cream-deep:   #B6B0A0;
+  --cream-light:  #E8DCC7;
+  --cream-card:   #E8DCC7;
 
-  /* ── Burgundy & gold scale ───────────────────────────────────── */
-  --gold:         #B8863C;
-  --gold-light:   #D9AE6C;
-  --gold-bright:  #F0D9A8;
-  --clay:         #7D5411;
+  /* ── Primary accent — dusty rose ─────────────────────────────── */
+  --primary:       #B77D6C;
+  --primary-light:  #D0A99A;
+  --primary-deep:   #8B5C3A;
 
-  /* ── Ink (text) — deep burgundy heading ink ─────────────────── */
-  --ink:          #5E1327;
-  --ink-soft:     #4A3F39;
-  --ink-muted:    #8A6A46;
+  /* ── Gold scale → warm wood tones ───────────────────────────────── */
+  --gold:         #8B5C3A;
+  --gold-light:   #B77D6C;
+  --gold-bright:  #E8DCC7;
+  --clay:         #8B5C3A;
 
-  /* ── Envelope scene background ─────────────────────────────────── */
-  --court-bg:     #17070C;
+  /* ── Ink (text) — deep forest for strong, formal contrast ───────── */
+  --ink:          #1B1F16;
+  --ink-soft:     #69614D;
+  --ink-muted:    #8C7C65;
 
-  /* ── Envelope shell — layered burgundy shades (flap/body/seal) ── */
-  --env-1:        #7A1B32;
-  --env-2:        #5A1123;
-  --env-3:        #3A0A17;
-  --env-lining:   #2E0811;
+  /* ── Gate scene ────────────────────────────────────────────────── */
+  --gate-bg:        #E1DED4;
+  --gate-door:      #8B5C3A;
+  --gate-door-dark: #69614D;
+  --gate-trim:      #8B5C3A;
 
   /* ── Textures (inline SVG, no asset files) ─────────────────────── */
   --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  --lining-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23D9AE6C' stroke-width='1'%3E%3Cpath d='M48 4c11 11 11 27 0 38C37 31 37 15 48 4zM48 54c11 11 11 27 0 38-11-11-11-27 0-38zM4 48c11-11 27-11 38 0-11 11-27 11-38 0zM54 48c11-11 27-11 38 0-11 11-27 11-38 0z'/%3E%3Cpath d='M48 4v38M48 54v38M4 48h38M54 48h38'/%3E%3Ccircle cx='48' cy='48' r='3.5'/%3E%3Ccircle cx='48' cy='48' r='7.5'/%3E%3C/g%3E%3C/svg%3E");
 
   /* ── Gold gradient (metallic foil — for text & headings) ───────── */
   --gold-gradient: linear-gradient(
     135deg,
-    #7D5411 0%,
-    #F0D9A8 32%,
-    #B8863C 54%,
-    #F0D9A8 74%,
-    #7D5411 100%
+    #8B5C3A 0%,
+    #E8DCC7 32%,
+    #B77D6C 54%,
+    #E8DCC7 74%,
+    #8B5C3A 100%
   );
 
   /* ── Clay gradient (bronze — decorative elements) ────────────────── */
   --clay-gradient: linear-gradient(
     135deg,
-    #7D5411 0%,
-    #F0D9A8 32%,
-    #7D5411 54%,
-    #B8863C 74%,
-    #7D5411 100%
+    #8B5C3A 0%,
+    #E8DCC7 32%,
+    #8B5C3A 54%,
+    #B77D6C 74%,
+    #8B5C3A 100%
   );
+
+  /* ── Per-element text colors (override via config.js theme) ────── */
+  --text-eyebrow:       var(--ink-soft);
+  --text-name-ar:       var(--primary);
+  --text-name-en:       var(--ink-soft);
+  --text-amp:           var(--gold-light);
+  --text-invite-line:   var(--ink-soft);
+  --text-date-main:     var(--ink);
+  --text-date-time:     var(--ink-soft);
+  --text-venue-name:    var(--ink);
+  --text-venue-addr:    var(--ink-soft);
+  --text-cd-num:        var(--cream-light);
+  --text-cd-lbl:        var(--gold-light);
+  --text-verse-ar:      var(--ink);
+  --text-verse-en:      var(--ink-soft);
+  --text-verse-ref:     var(--gold);
+  --text-section-label: var(--cream-light);
+  --text-footer:        var(--ink);
+  --text-gate-hint:     var(--ink-soft);
 
   /* ── Font stacks ─────────────────────────────────────────────── */
   --serif:      "Cormorant Garamond", Georgia, serif;
@@ -73,20 +93,27 @@
 /* Reduced motion — disable all animations globally */
 @media (prefers-reduced-motion: reduce) {
   .petal,
-  .music-btn .disc,
-  .envelope-stage,
-  .envelope,
-  .env-seal,
-  .env-hint {
+  .eq-bar,
+  .gate-scene,
+  .gate-door,
+  .gate-ornament,
+  .gate-hint,
+  .gate-welcome,
+  .gate-light,
+  .gate-flash,
+  .sparkle {
     animation: none !important;
   }
-  .envelope-stage,
-  .envelope,
-  .env-flap,
-  .env-letter,
-  .env-seal-half,
-  .letter-proxy {
+  .gate-door,
+  .gate-ornament,
+  .gate-scene,
+  .gate-light,
+  .invitation {
     transition-duration: 0.01ms !important;
+  }
+  .invitation {
+    transform: none !important;
+    filter: none !important;
   }
   #invitation-card,
   #invitation-card .inner > *,

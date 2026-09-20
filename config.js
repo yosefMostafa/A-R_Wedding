@@ -13,7 +13,7 @@ window.WEDDING_CONFIG = {
   groom: { en: "Youssef", ar: "يوسف" },
   bride: { en: "Huda", ar: "هدى" },
 
-  /* Two-letter monogram shown on the wax seal of the envelope */
+  /* Two-letter monogram shown on the gate ornament */
   monogram: "Y&H",
 
   /* Hashtag shown near the bottom (set to "" to hide) */
@@ -34,7 +34,7 @@ window.WEDDING_CONFIG = {
     en: "We are honored to invite you to the wedding of Youssef Ashraf & Huda Hussein",
     ar: "نتشرف بدعوة سيادتكم لحضور حفل زفاف يوسف أشرف وهدى حسين"
   },
-  
+
   /* ---- VENUE --------------------------------------------------------
      Fill the name + address, then paste the Google Maps share link into
      mapsUrl. The "Open in Google Maps" button stays disabled until you
@@ -71,31 +71,59 @@ window.WEDDING_CONFIG = {
   /* ---- COLOR THEME --------------------------------------------------
      Every color on the site is controlled here.
      Defaults (tokens.css values) are shown in comments — change the
-     active value to retheme. Remove a key to fall back to the default. */
+     active value to retheme. Remove a key or set to "" to fall back
+     to the default. */
   theme: {
-    /* ── Cream palette ───────────────────────────────────────────── */
-    cream:        "#F8F3EA",
-    creamDeep:    "#EFE2D6",
-    creamLight:   "#FDFAF3",
-    creamCard:    "#F4ECE0",
+    /* ── Backgrounds ─────────────────────────────────────────────── */
+    cream:        "#E1DED4",
+    creamDeep:    "#B6B0A0",
+    creamLight:   "#E8DCC7",
+    creamCard:    "#E8DCC7",
 
-    /* ── Burgundy & gold scale ──────────────────────────────────── */
-    gold:         "#B8863C",   /* borders, dividers   */
-    goldLight:    "#D9AE6C",   /* lighter accents     */
-    goldBright:   "#F0D9A8",   /* highlights          */
-    clay:         "#7D5411",   /* corner diamonds, button hover fill */
+    /* ── Primary accent (dusty rose) ─────────────────────────────── */
+    primary:      "#B77D6C",
+    primaryLight: "#D0A99A",
+    primaryDeep:  "#8B5C3A",
 
-    /* ── Ink (text) — deep burgundy heading ink ───────────────────── */
-    ink:          "#5E1327",
-    inkSoft:      "#4A3F39",
-    inkMuted:     "#8A6A46",
+    /* ── Gold scale → warm wood tones ─────────────────────────────── */
+    gold:         "#8B5C3A",
+    goldLight:    "#B77D6C",
+    goldBright:   "#E8DCC7",
+    clay:         "#8B5C3A",
 
-    /* ── Envelope scene ──────────────────────────────────────────── */
-    courtBg:      "#17070C",
+    /* ── Default text — deep forest ──────────────────────────────── */
+    ink:          "#1B1F16",
+    inkSoft:      "#69614D",
+    inkMuted:     "#8C7C65",
+
+    /* ── Gate scene ──────────────────────────────────────────────── */
+    gateBg:       "#E1DED4",
+    gateDoor:     "#8B5C3A",
+    gateDoorDark: "#69614D",
+    gateTrim:     "#8B5C3A",
+
+    /* ── Per-element text colors (set to "" to use the CSS default) ─ */
+    textEyebrow:     "",   /* default: --ink-soft              */
+    textNameAr:      "",   /* default: --primary  (warm rose)  */
+    textNameEn:      "",   /* default: --ink-soft              */
+    textAmp:         "",   /* default: --gold-light            */
+    textInviteLine:  "",   /* default: --ink-soft              */
+    textDateMain:    "",   /* default: --ink                   */
+    textDateTime:    "",   /* default: --ink-soft              */
+    textVenueName:   "",   /* default: --ink                   */
+    textVenueAddr:   "",   /* default: --ink-soft              */
+    textCountdownNum:"",   /* default: --cream-light           */
+    textCountdownLbl:"",   /* default: --gold-light            */
+    textVerseAr:     "",   /* default: --ink                   */
+    textVerseEn:     "",   /* default: --ink-soft              */
+    textVerseRef:    "",   /* default: --gold                  */
+    textSectionLabel:"",   /* default: --cream-light           */
+    textFooter:      "",   /* default: --ink                   */
+    textGateHint:    "",   /* default: --ink-soft              */
 
     /* ── Gradients (full CSS gradient strings) ───────────────────── */
-    goldGradient: "linear-gradient(135deg, #7D5411 0%, #F0D9A8 32%, #B8863C 54%, #F0D9A8 74%, #7D5411 100%)",
-    clayGradient: "linear-gradient(135deg, #7D5411 0%, #F0D9A8 32%, #7D5411 54%, #B8863C 74%, #7D5411 100%)"
+    goldGradient: "linear-gradient(135deg, #8B5C3A 0%, #E8DCC7 32%, #B77D6C 54%, #E8DCC7 74%, #8B5C3A 100%)",
+    clayGradient: "linear-gradient(135deg, #8B5C3A 0%, #E8DCC7 32%, #8B5C3A 54%, #B77D6C 74%, #8B5C3A 100%)"
   }
 
 };
